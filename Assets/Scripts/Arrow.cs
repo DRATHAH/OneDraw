@@ -41,9 +41,12 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        canHit = true;
-        arrowCol.isTrigger = false;
-        rb.isKinematic = false;
+        if (!other.isTrigger)
+        {
+            canHit = true;
+            arrowCol.isTrigger = false;
+            rb.isKinematic = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
