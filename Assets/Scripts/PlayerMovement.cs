@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed = 10f;
     public float jumpForce = 10f;
     public float groundDrag = 10f;
+    public float jumpDelay = 0.25f;
 
     public LayerMask groundLayer;
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     float vertRot;
     float horRot;
+    bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -67,10 +69,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = groundDrag;
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && canJump)
             {
+                canJump = false;
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                StartCoroutine(JumpDelay());
             }
         }
         else
@@ -95,5 +99,11 @@ public class PlayerMovement : MonoBehaviour
         bool hasHit = Physics.SphereCast(start, col.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer); // Detect if ground layer was found
 
         return hasHit;
+    }
+
+    IEnumerator JumpDelay()
+    {
+        yield return new WaitForSeconds(jumpDelay);
+        canJump = true;
     }
 }
