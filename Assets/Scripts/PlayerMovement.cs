@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f;
     public float groundDrag = 10f;
     public float jumpDelay = 0.25f;
+    public Transform playerModel;
 
     public LayerMask groundLayer;
 
@@ -52,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
         vertRot = Mathf.Clamp(vertRot, -clampAngle, clampAngle); // Limit how far up and down the player can look
         head.localRotation = Quaternion.Euler(vertRot, horRot, 0f); // Set rotation of head
+
+        playerModel.rotation = Quaternion.Euler(0, horRot, 0);
     }
 
     public void Move()
