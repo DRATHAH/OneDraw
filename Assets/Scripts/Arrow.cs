@@ -52,19 +52,20 @@ public class Arrow : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         DamageableCharacter damageable = collision.transform.root.GetComponent<DamageableCharacter>();
-        if (damageable && canHit)
+        if (damageable && canHit && collision.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.Targetable)
         {
+            canHit = false;
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
+            canHit = false;
             arrowCol.isTrigger = true;
             rb.freezeRotation = true;
             rb.isKinematic = true;
         }
-        canHit = false;
     }
 
     public void Initialize(Vector3 origin, float shootForce, int damage, float knockbackForce)
