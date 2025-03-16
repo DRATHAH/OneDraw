@@ -44,11 +44,15 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public int maxHealth = 10;
     public int health = 10;
     public bool isPlayer = false;
-    public List<GameObject> loot;
-    public List<float> lootChance;
-    public Dictionary<GameObject, float> lootMap;
+    public List<GameObject> loot = new List<GameObject>();
+    public List<float> lootChance = new List<float>();
+    public Dictionary<GameObject, float> lootMap = new Dictionary<GameObject, float>();
+    [Tooltip("Force that dropped items 'pop' out from object")]
+    public float lootDropForce = 1;
+    [Tooltip("Randomization of where loot spawns on object")]
+    public float lootSpawnOffset = .1f;
 
-    Rigidbody rb;
+    public Rigidbody rb;
     bool targetable = true;
 
     public UnityEvent OnDestroyEvents;
@@ -79,17 +83,21 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public void RemoveCharacter()
     {
         OnDestroyEvents.Invoke();
-        if (lootMap != null)
+        foreach (GameObject loot in lootMap.Keys)
         {
-            foreach (GameObject loot in lootMap.Keys)
+            float randChance = Random.Range(0f, 100f);
+            if (lootMap[loot] >= randChance && loot)
             {
-                float randChance = Random.Range(0f, 100f);
-                if (lootMap[loot] >= randChance && loot)
-                {
-                    Instantiate(loot);
-                }
+                float RandX = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                float RandY = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                float RandZ = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                Vector3 spawn = new Vector3(transform.position.x + RandX, transform.position.y + RandY, transform.position.z + RandZ);
+                GameObject lootObj = Instantiate(loot, spawn, Quaternion.identity);
+
+                lootObj.GetComponent<Rigidbody>().AddExplosionForce(lootDropForce, transform.position - transform.up, 5);
             }
         }
+
 
         Destroy(gameObject);
 

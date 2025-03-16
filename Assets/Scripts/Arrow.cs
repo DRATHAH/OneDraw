@@ -54,16 +54,26 @@ public class Arrow : MonoBehaviour
         DamageableCharacter damageable = collision.transform.root.GetComponent<DamageableCharacter>();
         if (damageable && canHit && collision.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.Targetable)
         {
+            // Freeze arrow once it hits a destructible
             canHit = false;
+            rb.velocity = Vector3.zero;
+            rb.freezeRotation = true;
+            arrowCol.isTrigger = true;
+            rb.isKinematic = true;
+
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
+
+
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
+            // Freeze arrow once it hits a wall
             canHit = false;
-            arrowCol.isTrigger = true;
             rb.freezeRotation = true;
+            rb.velocity = Vector3.zero;
+            arrowCol.isTrigger = true;
             rb.isKinematic = true;
         }
     }
