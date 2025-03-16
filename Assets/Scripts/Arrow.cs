@@ -56,6 +56,7 @@ public class Arrow : MonoBehaviour
         {
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
+            Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
