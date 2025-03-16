@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2089209454114597943}
   - component: {fileID: 7084575564181169169}
   - component: {fileID: 6656698425398297429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ Rigidbody:
   m_GameObject: {fileID: 7001261873703161754}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 7992212649960580143}
   - component: {fileID: 4160075025513109849}
   - component: {fileID: 7503563159765821959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
