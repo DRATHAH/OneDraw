@@ -80,6 +80,11 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    public void Heal(int health)
+    {
+        Health += health;
+    }
+
     public void RemoveCharacter()
     {
         OnDestroyEvents.Invoke();
