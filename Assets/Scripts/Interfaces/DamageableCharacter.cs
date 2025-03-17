@@ -58,7 +58,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     [Tooltip("Randomization of where loot spawns on object")]
     public float lootSpawnOffset = .1f;
 
-    private Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
     bool targetable = true;
 
     public UnityEvent OnDestroyEvents;

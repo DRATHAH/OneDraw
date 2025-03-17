@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEditor.FilePathAttribute;
 
-public class PatrolEnemy : MonoBehaviour
+public class PatrolEnemy : DamageableCharacter
 {
     public int dmg = 1;
     public float moveSpeed = 10f;
@@ -17,14 +17,14 @@ public class PatrolEnemy : MonoBehaviour
     private int currentLocation = 0;
     private bool chasingPlayer;
     private Transform player;
-    private Rigidbody rb;
+    private Rigidbody body;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
 
         InitializePatrolRoute();
         MoveToNextPatrolLocation();
@@ -67,7 +67,7 @@ public class PatrolEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player detected - start chasing!");
+            //Debug.Log("Player detected - start chasing!");
             chasingPlayer = true;
             agent.SetDestination(player.position);
         }
@@ -78,7 +78,7 @@ public class PatrolEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player out of range - resume patrol.");
+            //Debug.Log("Player out of range - resume patrol.");
             chasingPlayer = false;
             MoveToNextPatrolLocation();
         }
@@ -93,8 +93,8 @@ public class PatrolEnemy : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             {
-                damageable.OnHit(dmg, rb.velocity, hit);
-                Debug.Log("Hit Player");
+                damageable.OnHit(dmg, body.velocity, hit);
+                //Debug.Log("Hit Player");
             }
         }
     }
