@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : DamageableCharacter
 {
     public Transform head;
     public Camera mainCam;
@@ -13,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed = 10f;
     public float jumpForce = 10f;
     public float groundDrag = 10f;
+    public float airDrag = 1;
     public float jumpDelay = 0.25f;
+    public Transform playerModel;
 
     public LayerMask groundLayer;
 
     CapsuleCollider col;
-    Rigidbody rb;
+    Rigidbody body;
     float vertRot;
     float horRot;
     bool canJump = true;
@@ -27,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         col = GetComponent<CapsuleCollider>();
-        rb = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
         vertRot = Mathf.Clamp(vertRot, -clampAngle, clampAngle); // Limit how far up and down the player can look
         head.localRotation = Quaternion.Euler(vertRot, horRot, 0f); // Set rotation of head
+
+        playerModel.rotation = Quaternion.Euler(0, horRot, 0);
     }
 
     public void Move()
@@ -63,31 +67,40 @@ public class PlayerMovement : MonoBehaviour
         Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
         Vector3 movement = yaw * new Vector3(horMovement * moveSpeed, 0, vertMovement * moveSpeed);
 
-        rb.AddForce(movement.normalized * moveSpeed, ForceMode.Force);
+        body.AddForce(movement.normalized * moveSpeed, ForceMode.Force);
 
         if (CheckIfGrounded())
         {
-            rb.drag = groundDrag;
+            body.drag = groundDrag;
 
             if (Input.GetKey(KeyCode.Space) && canJump)
             {
                 canJump = false;
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+                body.AddForce(transform.up * jumpForce, ForceMode.Impulse);
                 StartCoroutine(JumpDelay());
+            }
+        }
+        else if (!CheckIfGrounded() && !body.useGravity)
+        {
+            body.drag = groundDrag;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+                body.AddForce(transform.up * jumpForce, ForceMode.Force);
             }
         }
         else
         {
-            rb.drag = 0;
+            body.drag = airDrag;
         }
 
 
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
         if (flatVel.magnitude > maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
         }
     } 
 
