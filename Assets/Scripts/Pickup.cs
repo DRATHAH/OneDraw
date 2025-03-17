@@ -7,7 +7,8 @@ public class Pickup : MonoBehaviour
     public enum PickupType
     {
         coin = 1,
-        health = 2
+        health = 2,
+        crystal
     }
     public PickupType type = PickupType.coin;
     public int value = 1;

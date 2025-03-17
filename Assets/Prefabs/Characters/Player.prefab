@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1177393722915567800}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,6 @@ MonoBehaviour:
   lootChance: []
   lootDropForce: 1
   lootSpawnOffset: 0.1
-  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
