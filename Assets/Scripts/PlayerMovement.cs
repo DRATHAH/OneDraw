@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : DamageableCharacter
 {
@@ -39,13 +40,16 @@ public class PlayerMovement : DamageableCharacter
     public float dashCooldown = 0.75f;
 
     private bool canDash = true;
+    private float dashCDCurrent;
     #endregion
 
     #region Reference Variables
     [Header("Reference Variables")]
     public Transform playerModel;
     public LayerMask groundLayer;
+    public GameObject dashMeter;
 
+    Slider dashSlider;
     CapsuleCollider col;
     Rigidbody body;
     #endregion
@@ -59,6 +63,9 @@ public class PlayerMovement : DamageableCharacter
 
         vertRot = transform.localEulerAngles.x;
         horRot = transform.localEulerAngles.y;
+
+        dashSlider = dashMeter.GetComponent<Slider>();
+        dashCDCurrent = dashCooldown;
     }
 
     // Update is called once per frame
@@ -66,6 +73,17 @@ public class PlayerMovement : DamageableCharacter
     {
         Look();
         Move();
+
+        #region UI Elements
+
+        if (!canDash)
+        {
+            dashCDCurrent += Time.deltaTime;
+        }
+        dashSlider.value = dashCDCurrent / dashCooldown;
+        dashMeter.SetActive(dashCDCurrent < dashCooldown);
+
+        #endregion
     }
 
     public void Look()
@@ -152,8 +170,12 @@ public class PlayerMovement : DamageableCharacter
     {
         body.AddForce(new Vector3(playerModel.forward.x * dashSpeed, 0f, playerModel.forward.z * dashSpeed), ForceMode.Impulse);
         yield return new WaitForSeconds (dashTime);
+
+        dashCDCurrent = 0;
         canDash = false;
         yield return new WaitForSeconds(dashCooldown);
+
+        dashCDCurrent = dashCooldown;
         canDash = true;
     }
 }

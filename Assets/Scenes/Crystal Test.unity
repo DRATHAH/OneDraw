@@ -992,6 +992,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1185822991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8389068082393284928, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 7858485035355990421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1210553155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1221,38 @@ PrefabInstance:
     - target: {fileID: 1345087428913588515, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashMeter
+      value: 
+      objectReference: {fileID: 1185822991}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: moveSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashingTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashCooldown
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashingPower
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: UIText
@@ -1998,9 +2035,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2737091594565532420, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737091594565532420, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737091594565532420, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4503971647187518249, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
       propertyPath: m_Name
       value: PlayerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814650710224804886, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -5.0699816
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814650710224804886, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4649906
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590708687462417605, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590708687462417605, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590708687462417605, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590708687462417605, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270793421076093266, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_Value
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270793421076093266, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_MaxValue
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389068082393284928, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

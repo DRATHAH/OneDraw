@@ -67,7 +67,7 @@ public class PatrolEnemy : DamageableCharacter
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player detected - start chasing!");
+            //Debug.Log("Player detected - start chasing!");
             chasingPlayer = true;
             agent.SetDestination(player.position);
         }
@@ -78,7 +78,7 @@ public class PatrolEnemy : DamageableCharacter
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player out of range - resume patrol.");
+            //Debug.Log("Player out of range - resume patrol.");
             chasingPlayer = false;
             MoveToNextPatrolLocation();
         }
@@ -94,7 +94,7 @@ public class PatrolEnemy : DamageableCharacter
             if (hit.CompareTag("Player"))
             {
                 damageable.OnHit(dmg, body.velocity, hit);
-                Debug.Log("Hit Player");
+                //Debug.Log("Hit Player");
             }
         }
     }
