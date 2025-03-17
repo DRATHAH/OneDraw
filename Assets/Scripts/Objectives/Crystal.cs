@@ -14,9 +14,6 @@ public class Crystal : Pickup
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.CompareTag("Arrow"))
-        {
-            Debug.Log("Collided with " + other.gameObject.name);
             gate.ShatterCrystal(gameObject);
-        }
     }
 }

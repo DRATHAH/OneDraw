@@ -50,12 +50,11 @@ public class CrystalGate : MonoBehaviour
     private void ResetCrystals()
     {
         // If not all crystals are shattered within the time limit, reset all crystals
-        Debug.Log("Time Limit reached. Resetting crystals");
+        Debug.Log("Time Limit reached. Reset crystals.");
         for (int i = 0; i < ogCrystalCount; i++)
-        {
             crystals[i].SetActive(true);
-            currCrystalCount++;
-        }
+
+        currCrystalCount = ogCrystalCount;
         
     }
 }
