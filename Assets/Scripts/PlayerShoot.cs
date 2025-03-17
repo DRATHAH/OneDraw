@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerShoot : MonoBehaviour
     public float arrowDamage = 10;
     [Tooltip("How much knockback the arrow inflicts on targets")]
     public float knockbackForce = 0;
+    public TMP_Text chargeIndicator;
+    public GameObject UIText;
 
     float shootProgress = 0; // How long the player has held the mouse down for
 
@@ -29,8 +32,9 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && hasArrow)
         {
+            UIText.SetActive(true);
             if (shootProgress < shootMod)
             {
                 shootProgress += drawSpeed * Time.deltaTime;
@@ -39,10 +43,12 @@ public class PlayerShoot : MonoBehaviour
             {
                 shootProgress = shootMod;
             }
+            chargeIndicator.text = (int)shootProgress + "%";
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow)
         {
+            UIText.SetActive(false);
             hasArrow = false;
             float speed = shootStr * (shootProgress / shootMod);
             float dmgCalc = arrowDamage * (shootProgress / shootMod) + 0.5f;
