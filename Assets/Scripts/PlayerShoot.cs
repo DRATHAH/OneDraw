@@ -5,6 +5,7 @@ using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
+    public bool canShoot = true;
     public bool hasArrow = true;
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
@@ -28,16 +29,10 @@ public class PlayerShoot : MonoBehaviour
     float shootProgress = 0; // How long the player has held the mouse down for
     bool drawAudioPlaying = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && hasArrow)
+        if (Input.GetKey(KeyCode.Mouse0) && hasArrow && Cursor.lockState == CursorLockMode.Locked && canShoot) // Checks to make sure player can draw back bow first
         {
             UIText.SetActive(true);
             if (!drawAudioPlaying)
@@ -56,7 +51,7 @@ public class PlayerShoot : MonoBehaviour
             chargeIndicator.text = (int)shootProgress + "%";
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow)
+        if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow && Cursor.lockState == CursorLockMode.Locked && canShoot)
         {
             UIText.SetActive(false);
             bowDrawSFX.Stop();
@@ -71,6 +66,15 @@ public class PlayerShoot : MonoBehaviour
             shootProgress = 0;
         }
         arrowIcon.SetActive(hasArrow);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Cursor.lockState == CursorLockMode.Locked)
+        {
+            canShoot = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            canShoot = false;
+        }
     }
 
     public void PlayPickupSound()
