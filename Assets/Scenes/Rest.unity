@@ -3354,6 +3354,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -3805,6 +3806,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -5343,6 +5345,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -6109,6 +6112,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -6353,6 +6357,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092086650}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1119080549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8389068082393284928, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 63327972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1148222283
 GameObject:
   m_ObjectHideFlags: 0
@@ -6813,6 +6822,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashMeter
+      value: 
+      objectReference: {fileID: 1119080549}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: UIText
       value: 
@@ -6884,6 +6897,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -9350,6 +9364,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -9640,6 +9655,7 @@ MonoBehaviour:
   - 100
   lootDropForce: 500
   lootSpawnOffset: 0.5
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []

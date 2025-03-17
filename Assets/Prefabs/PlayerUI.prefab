@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 6402168125103552810}
   - component: {fileID: 8270793421076093266}
   m_Layer: 5
-  m_Name: Dash Cooldown
+  m_Name: Dash Meter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
