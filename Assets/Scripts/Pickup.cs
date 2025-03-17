@@ -17,13 +17,16 @@ public class Pickup : MonoBehaviour
     public float bobSpeed = 1;
     public Transform graphic;
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponent<DamageableCharacter>())
         {
             if (type == PickupType.coin)
             {
-                PlayerStats.Instance.coins += value;
+                if (PlayerStats.Instance)
+                {
+                    PlayerStats.Instance.coins += value;
+                }
             }
             else if (type == PickupType.health)
             {
@@ -37,6 +40,6 @@ public class Pickup : MonoBehaviour
     private void Update()
     {
         graphic.Rotate(Vector3.up, rotSpeed * Time.deltaTime, Space.World);
-        graphic.position = (transform.position + Vector3.up * 0.5f) + new Vector3(0, .025f * Mathf.Sin(Time.time * bobSpeed), 0f);
+        graphic.position = transform.position + new Vector3(0, .025f * Mathf.Sin(Time.time * bobSpeed), 0f);
     }
 }

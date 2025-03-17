@@ -12,6 +12,10 @@ public class Arrow : MonoBehaviour
 
     BoxCollider arrowCol;
     bool canHit = true;
+    int maxDmg;
+    Vector3 maxForceVel;
+    float speedRef = 0; // used to calculate adaptive damage
+    float mag;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +26,29 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
+        if (speedRef == 0 && rb.velocity.magnitude != 0)
+        {
+            speedRef = rb.velocity.magnitude;
+        }
+
         if (canHit)
         {
-            Vector3 direction = ((transform.position + rb.velocity) - lead.position).normalized;
+            // Makes arrow face direction it is moving
+            Vector3 direction = ((transform.position + transform.forward * 0.5f + rb.velocity) - lead.position).normalized;
             Quaternion lookRot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5);
+
+            // Calculates damage based on speed of arrow
+            if (rb.velocity.magnitude > 0)
+            {
+                mag = rb.velocity.magnitude;
+                float dmgCalc = (rb.velocity.magnitude / (maxForceVel.magnitude / (rb.mass) * Time.fixedDeltaTime)) * maxDmg + 0.5f;
+                dmg = (int)dmgCalc;
+                if (dmg > maxDmg)
+                {
+                    dmg = maxDmg;
+                }
+            }
         }
     }
 
@@ -58,31 +80,36 @@ public class Arrow : MonoBehaviour
             // Freeze arrow once it hits a destructible
             canHit = false;
             rb.velocity = Vector3.zero;
-            rb.freezeRotation = true;
             arrowCol.isTrigger = true;
             rb.isKinematic = true;
 
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
+            Debug.Log(mag/(maxForceVel.magnitude / rb.mass * Time.fixedDeltaTime));
 
-
+            if (!damageable || damageable.health <= 0)
+            {
+                canHit = true;
+                arrowCol.isTrigger = false;
+                rb.isKinematic = false;
+            }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
             // Freeze arrow once it hits a wall
             canHit = false;
-            rb.freezeRotation = true;
             rb.velocity = Vector3.zero;
             arrowCol.isTrigger = true;
             rb.isKinematic = true;
         }
     }
 
-    public void Initialize(Vector3 origin, float shootForce, int damage, float knockbackForce)
+    public void Initialize(Vector3 origin, float shootForce, float maxForce, int maxDamage, float knockbackForce)
     {
         initialForce = origin * shootForce;
-        dmg = damage;
+        maxForceVel = origin * maxForce;
+        maxDmg = maxDamage;
         knockback = knockbackForce;
     }
 }

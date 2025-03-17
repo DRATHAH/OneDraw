@@ -15,7 +15,7 @@ public class PlayerShoot : MonoBehaviour
     [Tooltip("How fast the player draws the arrow back")]
     public float drawSpeed = 25;
     [Tooltip("How much damage the arrow does at max draw strength")]
-    public float arrowDamage = 10;
+    public int arrowDamage = 10;
     [Tooltip("How much knockback the arrow inflicts on targets")]
     public float knockbackForce = 0;
     public TMP_Text chargeIndicator;
@@ -64,12 +64,10 @@ public class PlayerShoot : MonoBehaviour
             bowShootSFX.Play(0);
             hasArrow = false;
             float speed = shootStr * (shootProgress / shootMod);
-            float dmgCalc = arrowDamage * (shootProgress / shootMod) + 0.5f;
-            int dmg = (int)dmgCalc;
             float knockback = knockbackForce * (shootProgress / shootMod);
 
             GameObject arrow = Instantiate(arrowPrefab, arrowSpawn.position + arrowSpawn.forward * spawnOffset, arrowSpawn.rotation);
-            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, dmg, knockback);
+            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, shootStr, arrowDamage, knockback);
             shootProgress = 0;
         }
         arrowIcon.SetActive(hasArrow);

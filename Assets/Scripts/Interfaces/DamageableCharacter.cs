@@ -17,6 +17,11 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 // Hit animation
             }
 
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+
             if (health <= 0 && Targetable)
             {
                 Targetable = false;
@@ -45,8 +50,9 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public int health = 10;
     public bool isPlayer = false;
     public List<GameObject> loot = new List<GameObject>();
+    [Tooltip("Add a new entry for EACH loot drop. X/100 chance for item to drop.")]
     public List<float> lootChance = new List<float>();
-    public Dictionary<GameObject, float> lootMap = new Dictionary<GameObject, float>();
+    public Dictionary<List<GameObject>, float> lootMap = new Dictionary<List<GameObject>, float>();
     [Tooltip("Force that dropped items 'pop' out from object")]
     public float lootDropForce = 1;
     [Tooltip("Randomization of where loot spawns on object")]
@@ -63,10 +69,17 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
 
+        List<GameObject> sameItemList = new List<GameObject>();
         for (int i = 0; i < loot.Count; i++)
         {
-            lootMap.Add(loot[i], lootChance[i]);
+            if (i > 0 && loot[i] != loot[i - 1])
+            {
+                lootMap.Add(sameItemList, lootChance[i-1]);
+                sameItemList = new List<GameObject>();
+            }
+            sameItemList.Add(loot[i]);
         }
+        lootMap.Add(sameItemList, lootChance[lootChance.Count-1]);
     }
 
     public void OnHit(int damage, Vector3 knockback, GameObject hit)
@@ -88,18 +101,21 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public void RemoveCharacter()
     {
         OnDestroyEvents.Invoke();
-        foreach (GameObject loot in lootMap.Keys)
+        foreach (List<GameObject> lootList in lootMap.Keys)
         {
-            float randChance = Random.Range(0f, 100f);
-            if (lootMap[loot] >= randChance && loot)
+            foreach(GameObject loot in lootList)
             {
-                float RandX = Random.Range(-lootSpawnOffset, lootSpawnOffset);
-                float RandY = Random.Range(-lootSpawnOffset, lootSpawnOffset);
-                float RandZ = Random.Range(-lootSpawnOffset, lootSpawnOffset);
-                Vector3 spawn = new Vector3(transform.position.x + RandX, transform.position.y + RandY, transform.position.z + RandZ);
-                GameObject lootObj = Instantiate(loot, spawn, Quaternion.identity);
+                float randChance = Random.Range(0f, 100f);
+                if (lootMap[lootList] >= randChance && loot)
+                {
+                    float RandX = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                    float RandY = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                    float RandZ = Random.Range(-lootSpawnOffset, lootSpawnOffset);
+                    Vector3 spawn = new Vector3(transform.position.x + RandX, transform.position.y + RandY, transform.position.z + RandZ);
+                    GameObject lootObj = Instantiate(loot, spawn, Quaternion.identity);
 
-                lootObj.GetComponent<Rigidbody>().AddExplosionForce(lootDropForce, transform.position - transform.up, 5);
+                    lootObj.GetComponent<Rigidbody>().AddExplosionForce(lootDropForce, transform.position - transform.up, 5);
+                }
             }
         }
 
