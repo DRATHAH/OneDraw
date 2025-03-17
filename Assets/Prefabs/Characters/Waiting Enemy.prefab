@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8323293703590403617}
   - component: {fileID: 6820274571941595974}
   - component: {fileID: 1903489724711631339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Waiting Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,6 +175,13 @@ MonoBehaviour:
   maxHealth: 20
   health: 20
   isPlayer: 0
+  loot: []
+  lootChance: []
+  lootDropForce: 1
+  lootSpawnOffset: 0.1
+  OnDestroyEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6820274571941595974
 MonoBehaviour:
   m_ObjectHideFlags: 0
