@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 716341396165594593}
   - component: {fileID: 2789900677716376694}
   - component: {fileID: 809782800072596777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Patrolling Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,6 +175,13 @@ MonoBehaviour:
   maxHealth: 3
   health: 3
   isPlayer: 0
+  loot: []
+  lootChance: []
+  lootDropForce: 1
+  lootSpawnOffset: 0.1
+  OnDestroyEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2789900677716376694
 MonoBehaviour:
   m_ObjectHideFlags: 0
