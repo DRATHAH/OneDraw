@@ -71,10 +71,7 @@ public class PlayerMovement : DamageableCharacter
     // Update is called once per frame
     void Update()
     {
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            Look();
-        }
+        Look();
         Move();
 
         #region UI Elements
@@ -158,7 +155,7 @@ public class PlayerMovement : DamageableCharacter
         Vector3 start = col.transform.TransformPoint(col.center); // Get character's center
         float rayLength = col.height / 2 - col.radius + 0.05f; // Distance from 'start' to end of character + bit extra to detect ground
 
-        bool hasHit = Physics.SphereCast(start, col.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer, QueryTriggerInteraction.Ignore); // Detect if ground layer was found
+        bool hasHit = Physics.SphereCast(start, col.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer); // Detect if ground layer was found
 
         return hasHit;
     }
