@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEditor.FilePathAttribute;
 
-public class WaitingEnemy : MonoBehaviour
+public class WaitingEnemy : DamageableCharacter
 {
     public int dmg = 1;
     public float moveSpeed = 10f;
@@ -14,14 +14,14 @@ public class WaitingEnemy : MonoBehaviour
     private bool chasingPlayer;
     private Transform player;
     private Vector3 startLocation;
-    private Rigidbody rb;
+    private Rigidbody body;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
         startLocation = transform.position;
     }
 
@@ -65,7 +65,7 @@ public class WaitingEnemy : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             {
-                damageable.OnHit(dmg, rb.velocity, hit);
+                damageable.OnHit(dmg, body.velocity, hit);
                 Debug.Log("Hit Player");
             }
         }

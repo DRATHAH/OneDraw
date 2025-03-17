@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7489383366773173392}
   - component: {fileID: 5506939843171437289}
   - component: {fileID: 2723405826999999598}
-  - component: {fileID: 716341396165594593}
   - component: {fileID: 2789900677716376694}
   - component: {fileID: 809782800072596777}
   m_Layer: 7
@@ -160,28 +159,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &716341396165594593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4172969925262982526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22050d543d3a12a4eadad4e1bb6148cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  health: 3
-  isPlayer: 0
-  loot: []
-  lootChance: []
-  lootDropForce: 1
-  lootSpawnOffset: 0.1
-  OnDestroyEvents:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2789900677716376694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +171,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77cbf1b51676874db7b437bde419fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 10
+  isPlayer: 0
+  loot: []
+  lootChance: []
+  lootDropForce: 1
+  lootSpawnOffset: 0.1
+  OnDestroyEvents:
+    m_PersistentCalls:
+      m_Calls: []
   dmg: 1
   moveSpeed: 10
   patrolRoute: {fileID: 0}

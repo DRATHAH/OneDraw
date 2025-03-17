@@ -164,6 +164,7 @@ MonoBehaviour:
   lootChance: []
   lootDropForce: 1
   lootSpawnOffset: 0.1
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -177,6 +178,9 @@ MonoBehaviour:
   groundDrag: 5
   airDrag: 1
   jumpDelay: 0.25
+  dashSpeed: 2
+  dashTime: 0.25
+  dashCooldown: 0.75
   playerModel: {fileID: 5395016468396375807}
   groundLayer:
     serializedVersion: 2

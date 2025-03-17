@@ -5,27 +5,51 @@ using UnityEngine;
 
 public class PlayerMovement : DamageableCharacter
 {
+    #region Camera Movement Variables
+    [Header("Camera Movement Variables")]
     public Transform head;
     public Camera mainCam;
     public float sensitivity = .5f;
     public float clampAngle = 85;
+
+    float vertRot;
+    float horRot;
+    #endregion
+
+    #region Walking Variables
+    [Header("Walking Variables")]
     public float moveSpeed = 5f;
     public float maxSpeed = 10f;
+    #endregion
+
+    #region Jumping Variables
+    [Header("Jumping Variables")]
     public float jumpForce = 10f;
     public float groundDrag = 10f;
     public float airDrag = 1;
     public float jumpDelay = 0.25f;
-    public Transform playerModel;
 
+    bool canJump = true;
+    #endregion
+
+    #region Dashing Variables
+    [Header("Dashing Variables")]
+    public float dashSpeed = 20f;
+    public float dashTime = 0.3f;
+    public float dashCooldown = 0.75f;
+
+    private bool canDash = true;
+    #endregion
+
+    #region Reference Variables
+    [Header("Reference Variables")]
+    public Transform playerModel;
     public LayerMask groundLayer;
 
     CapsuleCollider col;
     Rigidbody body;
-    float vertRot;
-    float horRot;
-    bool canJump = true;
+    #endregion
 
-    // Start is called before the first frame update
     void Start()
     {
         col = GetComponent<CapsuleCollider>();
@@ -95,6 +119,10 @@ public class PlayerMovement : DamageableCharacter
             body.drag = airDrag;
         }
 
+        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
 
         Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
         if (flatVel.magnitude > maxSpeed)
@@ -118,5 +146,14 @@ public class PlayerMovement : DamageableCharacter
     {
         yield return new WaitForSeconds(jumpDelay);
         canJump = true;
+    }
+    
+    IEnumerator Dash()
+    {
+        body.AddForce(new Vector3(playerModel.forward.x * dashSpeed, 0f, playerModel.forward.z * dashSpeed), ForceMode.Impulse);
+        yield return new WaitForSeconds (dashTime);
+        canDash = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }

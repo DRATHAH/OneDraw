@@ -9,7 +9,6 @@ public class CrystalGate : MonoBehaviour
     private GameObject[] crystals;
     private int ogCrystalCount;
     private int currCrystalCount;
-    private bool hasCrystals = true;
 
     private void Start()
     {
