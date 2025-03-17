@@ -7149,6 +7149,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 235120485}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: arrowIcon
+      value: 
+      objectReference: {fileID: 235120487}
+    - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: chargeIndicator
       value: 
       objectReference: {fileID: 235120486}
@@ -9038,6 +9042,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &235120487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1836561765718043015, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 235120484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &244415133
 PrefabInstance:
   m_ObjectHideFlags: 0

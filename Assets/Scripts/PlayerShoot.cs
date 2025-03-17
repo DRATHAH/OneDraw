@@ -20,8 +20,13 @@ public class PlayerShoot : MonoBehaviour
     public float knockbackForce = 0;
     public TMP_Text chargeIndicator;
     public GameObject UIText;
+    public GameObject arrowIcon;
+    public AudioSource bowDrawSFX;
+    public AudioSource bowShootSFX;
+    public AudioSource ArrowPickupSFX;
 
     float shootProgress = 0; // How long the player has held the mouse down for
+    bool drawAudioPlaying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,11 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && hasArrow)
         {
             UIText.SetActive(true);
+            if (!drawAudioPlaying)
+            {
+                bowDrawSFX.Play(0);
+                drawAudioPlaying = true;
+            }
             if (shootProgress < shootMod)
             {
                 shootProgress += drawSpeed * Time.deltaTime;
@@ -49,6 +59,9 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow)
         {
             UIText.SetActive(false);
+            bowDrawSFX.Stop();
+            drawAudioPlaying = false;
+            bowShootSFX.Play(0);
             hasArrow = false;
             float speed = shootStr * (shootProgress / shootMod);
             float dmgCalc = arrowDamage * (shootProgress / shootMod) + 0.5f;
@@ -59,5 +72,11 @@ public class PlayerShoot : MonoBehaviour
             arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, dmg, knockback);
             shootProgress = 0;
         }
+        arrowIcon.SetActive(hasArrow);
+    }
+
+    public void PlayPickupSound()
+    {
+        ArrowPickupSFX.Play(0);
     }
 }

@@ -35,6 +35,7 @@ public class Arrow : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             other.transform.root.GetComponent<PlayerShoot>().hasArrow = true;
+            other.transform.root.GetComponent<PlayerShoot>().PlayPickupSound();
             Destroy(gameObject);
         }
     }
