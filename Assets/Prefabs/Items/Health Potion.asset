@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 753f61d3923bc774ca3708f8beb9c641, type: 3}
   prefab: {fileID: 2975675685505128324, guid: b3546f7c13bc909498308be6ff07f578, type: 3}
   id: 0
-  desc: Restores 5 HP. Testing the length of the descriptions
+  desc: Restores 5 HP.
   price: 1
   isDefaultItem: 0
