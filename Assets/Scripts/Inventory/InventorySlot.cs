@@ -33,8 +33,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (item)
         {
+            Item tempItem = item;
+
             item.Use();
             Inventory.instance.Remove(item);
+            if (!Inventory.instance.items.ContainsKey(tempItem))
+            {
+                mouseOverlap = false;
+                description.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -55,8 +62,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnRemoveButton()
     {
         Inventory.instance.Remove(item);
-        mouseOverlap = false;
-        description.gameObject.SetActive(false);
+            mouseOverlap = false;
+            description.gameObject.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -64,7 +71,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (item)
         {
             mouseOverlap = true;
-            description.GetComponentInChildren<TMP_Text>().text = item.desc;
+            description.GetComponentInChildren<TMP_Text>().text = item.name + ":\n" + item.desc + "\n Price: " + item.price;
             description.gameObject.SetActive(true);
         }
     }
@@ -73,8 +80,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (mouseOverlap && item && description.gameObject.activeSelf)
         {
-            Vector3 pos = Input.mousePosition;
-            description.position = pos;
+            description.position = Input.mousePosition;
         }
     }
 

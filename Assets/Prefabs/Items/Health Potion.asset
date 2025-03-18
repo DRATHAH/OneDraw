@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39f81115dc944b24eb77b12fde4105cb, type: 3}
-  m_Name: Sample
+  m_Name: Health Potion
   m_EditorClassIdentifier: 
-  name: New Item
+  name: Health Potion
   icon: {fileID: 21300000, guid: 753f61d3923bc774ca3708f8beb9c641, type: 3}
   prefab: {fileID: 2975675685505128324, guid: b3546f7c13bc909498308be6ff07f578, type: 3}
   id: 0
-  desc: This is a sample description to see how long i can make the text descriptions.
+  desc: Restores 5 HP. Testing the length of the descriptions
   price: 1
   isDefaultItem: 0
