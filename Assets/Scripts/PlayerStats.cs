@@ -36,6 +36,7 @@ public class PlayerStats : MonoBehaviour
 
     public int coins = 0;
     public int score = 0;
+    public int health = 0;
 
     public void SetCursorLock(bool locked)
     {
