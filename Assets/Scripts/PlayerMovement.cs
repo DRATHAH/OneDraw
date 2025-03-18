@@ -19,6 +19,7 @@ public class PlayerMovement : DamageableCharacter
 
     #region Walking Variables
     [Header("Walking Variables")]
+    public bool canMove = true;
     public float moveSpeed = 5f;
     public float maxSpeed = 10f;
     #endregion
@@ -105,51 +106,54 @@ public class PlayerMovement : DamageableCharacter
 
     public void Move()
     {
-        float horMovement = Input.GetAxisRaw("Horizontal");
-        float vertMovement = Input.GetAxisRaw("Vertical");
-
-        // Get direction player is facing and move accordingly
-        Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
-        Vector3 movement = yaw * new Vector3(horMovement * moveSpeed, 0, vertMovement * moveSpeed);
-
-        body.AddForce(movement.normalized * moveSpeed, ForceMode.Force);
-
-        if (CheckIfGrounded())
+        if (canMove)
         {
-            body.drag = groundDrag;
+            float horMovement = Input.GetAxisRaw("Horizontal");
+            float vertMovement = Input.GetAxisRaw("Vertical");
 
-            if (Input.GetKey(KeyCode.Space) && canJump)
+            // Get direction player is facing and move accordingly
+            Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
+            Vector3 movement = yaw * new Vector3(horMovement * moveSpeed, 0, vertMovement * moveSpeed);
+
+            body.AddForce(movement.normalized * moveSpeed, ForceMode.Force);
+
+            if (CheckIfGrounded())
             {
-                canJump = false;
-                body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
-                body.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-                StartCoroutine(JumpDelay());
+                body.drag = groundDrag;
+
+                if (Input.GetKey(KeyCode.Space) && canJump)
+                {
+                    canJump = false;
+                    body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+                    body.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                    StartCoroutine(JumpDelay());
+                }
             }
-        }
-        else if (!CheckIfGrounded() && !body.useGravity)
-        {
-            body.drag = groundDrag;
-            if (Input.GetKey(KeyCode.Space))
+            else if (!CheckIfGrounded() && !body.useGravity)
             {
-                body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
-                body.AddForce(transform.up * jumpForce, ForceMode.Force);
+                body.drag = groundDrag;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+                    body.AddForce(transform.up * jumpForce, ForceMode.Force);
+                }
             }
-        }
-        else
-        {
-            body.drag = airDrag;
-        }
+            else
+            {
+                body.drag = airDrag;
+            }
 
-        if (Input.GetKey(KeyCode.LeftShift) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+            if (Input.GetKey(KeyCode.LeftShift) && canDash)
+            {
+                StartCoroutine(Dash());
+            }
 
-        Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
-        if (flatVel.magnitude > maxSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
+            Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
+            if (flatVel.magnitude > maxSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
+            }
         }
     } 
 

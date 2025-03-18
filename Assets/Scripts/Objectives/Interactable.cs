@@ -105,7 +105,14 @@ public class Interactable : MonoBehaviour
         {
             interacting = false;
             leaveEvent.Invoke();
+            StartCoroutine(AllowShoot());
             Debug.Log("Stopping interaction");
         }
+    }
+
+    IEnumerator AllowShoot()
+    {
+        yield return new WaitForSeconds(.01f);
+        //PlayerStats.Instance.SetCursorLock(true);
     }
 }

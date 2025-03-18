@@ -90,11 +90,6 @@ public class DialogueManager : MonoBehaviour
                 textNum = normalLines.Count - 1;
             }
             returnText = normalLines[textNum];
-
-            if (normalEventsList.ContainsKey(textNum))
-            {
-                normalEventsList[textNum].Invoke();
-            }
         }
         else
         {
@@ -103,11 +98,6 @@ public class DialogueManager : MonoBehaviour
                 textNum = cutsceneLines.Count - 1;
             }
             returnText = cutsceneLines[textNum];
-
-            if (cutsceneEventsList.ContainsKey(textNum))
-            {
-                cutsceneEventsList[textNum].Invoke();
-            }
         }
 
         return returnText;
@@ -180,5 +170,23 @@ public class DialogueManager : MonoBehaviour
         canForward = state;
 
         return state;
+    }
+
+    public void CheckEvents(TextType type)
+    {
+        if (type == TextType.normal)
+        {
+            if (normalEventsList.ContainsKey(textNum))
+            {
+                normalEventsList[textNum].Invoke();
+            }
+        }
+        else
+        {
+            if (cutsceneEventsList.ContainsKey(textNum))
+            {
+                cutsceneEventsList[textNum].Invoke();
+            }
+        }
     }
 }

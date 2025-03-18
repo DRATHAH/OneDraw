@@ -65,6 +65,10 @@ public class SubtitleManager : MonoBehaviour
             dialogueManager.GetContinueState();
             SetText(dialogueManager.speaker, dialogueManager.ReturnText());
         }
+        else if (dialogueManager && subtitles.finished)
+        {
+            dialogueManager.CheckEvents(dialogueManager.textType);
+        }
         else if (dialogueManager && !subtitles.finished)
         {
             FinishText(dialogueManager.speaker, dialogueManager.ReturnText());

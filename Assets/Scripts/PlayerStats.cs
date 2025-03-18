@@ -51,6 +51,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void SetPlayerMove(bool canMove)
+    {
+        player.canMove = canMove;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
