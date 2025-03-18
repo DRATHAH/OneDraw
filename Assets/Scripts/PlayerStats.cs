@@ -34,6 +34,7 @@ public class PlayerStats : MonoBehaviour
 
     public int coins = 0;
     public int score = 0;
+    public int health = 0;
 
     // Start is called before the first frame update
     void Start()
