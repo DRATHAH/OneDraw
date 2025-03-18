@@ -44,7 +44,7 @@ public class HealthManager : MonoBehaviour
     public void Heal(int healAmount)
     {
         healthAmount += healAmount;
-        healthAmount = (int)Mathf.Clamp(healthAmount, 0, maxHealth);
+        ClampHealth();
         UpdateHealthBar();
     }
 
@@ -57,12 +57,26 @@ public class HealthManager : MonoBehaviour
     public void LoseMaxHealth(int loseAmount)
     {
         maxHealth -= loseAmount;
-        healthAmount = (int)Mathf.Clamp(healthAmount, 0, maxHealth);
+        ClampHealth();
         UpdateHealthBar();
     }
 
+    public void setMaxHealth(int amount)
+    {
+        maxHealth = amount;
+        ClampHealth();
+        UpdateHealthBar();
+    }
+
+    // Using this method updates the Health Bar Full Image proportional to current hp / max hp
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)healthAmount / (float)maxHealth;
+    }
+
+    // Using this method prevents hp from exceeding Max hp
+    void ClampHealth()
+    {
+        healthAmount = (int)Mathf.Clamp(healthAmount, 0, maxHealth);
     }
 }
