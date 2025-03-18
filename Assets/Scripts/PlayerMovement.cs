@@ -49,6 +49,7 @@ public class PlayerMovement : DamageableCharacter
     public Transform playerModel;
     public LayerMask groundLayer;
     public GameObject dashMeter;
+    public HealthManager healthManager;
 
     Slider dashSlider;
     CapsuleCollider col;
@@ -61,6 +62,8 @@ public class PlayerMovement : DamageableCharacter
         body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        healthManager.setMaxHealth(maxHealth);
+        healthManager.TakeDamage(maxHealth - health);
 
         vertRot = transform.localEulerAngles.x;
         horRot = transform.localEulerAngles.y;
@@ -183,5 +186,15 @@ public class PlayerMovement : DamageableCharacter
 
         dashCDCurrent = dashCooldown;
         canDash = true;
+    }
+
+    public override void OnHit(int damage, Vector3 knockback, GameObject hit)
+    {
+        Health -= damage;
+        healthManager.TakeDamage(damage);
+        if (rb)
+        {
+            rb.AddForce(knockback, ForceMode.Impulse);
+        }
     }
 }

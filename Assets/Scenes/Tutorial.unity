@@ -2096,6 +2096,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: dashMeter
+      value: 
+      objectReference: {fileID: 1591975510}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: healthManager
+      value: 
+      objectReference: {fileID: 1657907048}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: UIText
       value: 
@@ -6289,6 +6297,22 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1591975510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8389068082393284928, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 1686862549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657907048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6574945302965794757, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 1686862549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff1452d5d19e094c9ec4d640199437f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1666054846
 GameObject:
   m_ObjectHideFlags: 0
