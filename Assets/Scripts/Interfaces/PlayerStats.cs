@@ -38,7 +38,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] Bow defaultBow;
     public int coins = 0;
     public int score = 0;
-    public int health = 0;
+    public int health = 10;
+    public int maxHealth = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -82,4 +83,6 @@ public class PlayerStats : MonoBehaviour
         shootStats.fireStacks = bow.fireStacks;
         shootStats.lightningStacks = bow.lightningStacks;
     }
+
+    
 }
