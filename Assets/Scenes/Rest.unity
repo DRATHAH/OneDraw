@@ -6524,7 +6524,7 @@ MonoBehaviour:
   defaultBow: {fileID: 11400000, guid: 1e3ec6c3116d1f4458053f8e0793d5df, type: 2}
   coins: 0
   score: 0
-  health: 0
+  health: 10
   maxHealth: 10
 --- !u!114 &816395860
 MonoBehaviour:

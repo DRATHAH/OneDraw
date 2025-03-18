@@ -24,11 +24,13 @@ public class HealthManager : MonoBehaviour
     public int healthAmount = 10;
     public int maxHealth = 10;
 
-    PlayerStats statsManager = PlayerStats.Instance;
+    PlayerStats statsManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        statsManager = PlayerStats.Instance;
+
         healthAmount = statsManager.health;
         maxHealth = statsManager.maxHealth;
     }
