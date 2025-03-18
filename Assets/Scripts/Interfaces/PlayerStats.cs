@@ -56,25 +56,6 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void SetCursorLock(bool locked)
-    {
-        if (locked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-    }
-
-    public void SetPlayerMove(bool canMove)
-    {
-        player.canMove = canMove;
-    }
-
     public void ModifyBowStats(int dmgMod, float fireStrengthMod, float drawSpeedMod, float knockbackForceMod, int frostStackMod, int fireStackMod, int lightningStackMod)
     {
         if (bow)

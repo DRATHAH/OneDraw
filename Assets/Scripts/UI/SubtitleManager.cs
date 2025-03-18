@@ -61,7 +61,7 @@ public class SubtitleManager : MonoBehaviour
     {
         if (dialogueManager && dialogueManager.CanForward() && subtitles.finished)
         {
-            PlayerStats.Instance.SetCursorLock(false);
+            GameManager.instance.SetCursorLock(false);
             dialogueManager.GetContinueState();
             SetText(dialogueManager.speaker, dialogueManager.ReturnText());
         }

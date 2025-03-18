@@ -56,8 +56,8 @@ public class CreateCards : MonoBehaviour
         }
         Debug.Log("cleared");
         instantiatedCards.Clear();
-        PlayerStats.Instance.SetCursorLock(true);
-        PlayerStats.Instance.SetPlayerMove(true);
+        GameManager.instance.SetCursorLock(true);
+        GameManager.instance.SetPlayerMove(true);
         onUpgradeEvents.Invoke();
     }
 }
