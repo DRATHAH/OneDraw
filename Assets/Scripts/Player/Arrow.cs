@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Arrow : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Arrow : MonoBehaviour
     public Vector3 initialForce;
     public Rigidbody rb;
     public Transform lead;
+    public UnityEvent hitEvent;
 
     [Header("Particles")]
     [SerializeField] GameObject frostParticles;
@@ -126,6 +128,11 @@ public class Arrow : MonoBehaviour
             rb.velocity = Vector3.zero;
             arrowCol.isTrigger = true;
             rb.isKinematic = true;
+        }
+
+        if (frostStacks > 0)
+        {
+
         }
     }
 

@@ -164,6 +164,8 @@ MonoBehaviour:
   lootChance: []
   lootDropForce: 1
   lootSpawnOffset: 0.1
+  lootSounds: []
+  soundParticle: {fileID: 0}
   rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
@@ -205,10 +207,13 @@ MonoBehaviour:
   arrowSpawn: {fileID: 8975043179052822930}
   spawnOffset: 0.5
   shootStr: 3500
-  shootMod: 100
   drawSpeed: 50
   arrowDamage: 10
   knockbackForce: 0
+  upgradeType: 0
+  frostStacks: 0
+  fireStacks: 0
+  lightningStacks: 0
   chargeIndicator: {fileID: 0}
   UIText: {fileID: 0}
   arrowIcon: {fileID: 0}
@@ -469,7 +474,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b47ccb102fd40034ea1abd37caa95732, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.805
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

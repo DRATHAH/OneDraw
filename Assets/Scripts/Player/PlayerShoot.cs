@@ -28,9 +28,9 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Upgrade Stats")]
     public UpgradeType upgradeType = UpgradeType.frost;
-    public int frostStacks = PlayerStats.Instance.bow.frostStacks;
-    public int fireStacks = PlayerStats.Instance.bow.fireStacks;
-    public int lightningStacks = PlayerStats.Instance.bow.lightningStacks;
+    public int frostStacks = 0;
+    public int fireStacks = 0;
+    public int lightningStacks = 0;
 
     [Header("UI")]
     public TMP_Text chargeIndicator;

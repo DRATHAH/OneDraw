@@ -49,6 +49,8 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public int maxHealth = 10;
     public int health = 10;
     public bool isPlayer = false;
+    [Tooltip("Multiplies any damage taken by this amount.")]
+    public float damageMultiplier = 1;
     public List<GameObject> loot = new List<GameObject>();
     [Tooltip("Add a new entry for EACH loot drop. X/100 chance for item to drop.")]
     public List<float> lootChance = new List<float>();
@@ -57,17 +59,27 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public float lootDropForce = 1;
     [Tooltip("Randomization of where loot spawns on object")]
     public float lootSpawnOffset = .1f;
+    [Tooltip("Sound(s) entity makes upon being destroyed.")]
+    public List<AudioSource> lootSounds;
+    [Tooltip("Sound particle in prefabs folder.")]
+    public GameObject soundParticle;
+
+    // Base stats that are updated once game starts
+    float baseMultiplier;
 
     [HideInInspector] public Rigidbody rb;
     bool targetable = true;
+    public Dictionary<Hazard, int> debuffs = new Dictionary<Hazard, int>(); // Types of debuffs applied to object
+    public Dictionary<Hazard, float> timePair = new Dictionary<Hazard, float>(); // How long those debuffs will last for
 
     public UnityEvent OnDestroyEvents;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        baseMultiplier = damageMultiplier;
 
         List<GameObject> sameItemList = new List<GameObject>();
         for (int i = 0; i < loot.Count; i++)
@@ -86,12 +98,58 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     {
         // We can add damage modifiers based off of the 'hit' GameObject using tags
 
-        Health -= damage;
+        Health -= (int)(damage * damageMultiplier + 0.5f);
         if (rb)
         {
             rb.AddForce(knockback, ForceMode.Impulse);
         }
     }
+
+    public virtual void OnHitDot(Hazard type)
+    {
+        if (debuffs.ContainsKey(type) && debuffs[type] >= type.stacks)
+        {
+            timePair[type] = type.lifeTime; // If debuff is stronger or the same, only refresh the timer
+        }
+        else if (debuffs.ContainsKey(type) && debuffs[type] < type.stacks)
+        {
+            // Remove weaker debuff
+            debuffs.Remove(type);
+            timePair.Remove(type);
+
+            // Apply more powerful debuff
+            timePair.Add(type, type.lifeTime);
+            debuffs.Add(type, type.stacks);
+        }
+    }
+
+    public virtual void Update()
+    {
+        foreach (Hazard negative in debuffs.Keys)
+        {
+            if (timePair[negative] > 0)
+            {
+                timePair[negative] -= Time.deltaTime; // Duration of debuff goes down based on time
+                if (negative.timeSinceTick <= 0) // Check to see if tick has gone off according to the Hazard gameObject
+                {
+                    OnHit(negative.damage, Vector3.zero, gameObject);
+                    damageMultiplier = negative.damageVulnerability;
+
+                    Debug.Log("Debuffed by " + negative.name);
+                }
+            }
+            else
+            {
+                // Remove debuff from object
+                debuffs.Remove(negative);
+                timePair.Remove(negative);
+
+                damageMultiplier = baseMultiplier; // Reset affected stats back to normal
+            }
+        }
+    }
+
+    
 
     public virtual void Heal(int health)
     {
@@ -119,6 +177,12 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             }
         }
 
+        foreach(AudioSource sound in lootSounds)
+        {
+            GameObject _sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+            SoundObject soundObj = _sound.GetComponent<SoundObject>();
+            soundObj.Initialize(sound);
+        }
 
         Destroy(gameObject);
 

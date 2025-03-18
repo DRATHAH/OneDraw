@@ -55,6 +55,8 @@ public class PlayerStats : MonoBehaviour
             bow.fireStacks = defaultBow.fireStacks;
             bow.lightningStacks = defaultBow.lightningStacks;
         }
+
+        UpdateBowStats();
     }
 
     public void ModifyBowStats(int dmgMod, float fireStrengthMod, float drawSpeedMod, float knockbackForceMod, int frostStackMod, int fireStackMod, int lightningStackMod)
