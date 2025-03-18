@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEditor.Progress;
@@ -107,11 +108,12 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     public virtual void OnHitDot(Hazard type)
     {
+        Debug.Log(debuffs.ContainsKey(type) + ", " + type.type);
         if (debuffs.ContainsKey(type) && debuffs[type] >= type.stacks)
         {
-            timePair[type] = type.lifeTime; // If debuff is stronger or the same, only refresh the timer
+            timePair[type] = type.subjectDuration; // If debuff is stronger or the same, only refresh the timer
         }
-        else if (debuffs.ContainsKey(type) && debuffs[type] < type.stacks)
+        else if (debuffs.ContainsKey(type) && debuffs[type] < type.stacks) // New debuff is stronger than previous debuff
         {
             // Remove weaker debuff
             debuffs.Remove(type);
@@ -120,6 +122,19 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             // Apply more powerful debuff
             timePair.Add(type, type.lifeTime);
             debuffs.Add(type, type.stacks);
+        }
+        else // Add a new debuff
+        {
+            if (type.subjectDuration == 0) // Just proc initial effect if it's an instant effect
+            {
+                OnHit(type.damage, Vector3.zero, gameObject);
+                Debug.Log("debuffed once by " + type.type);
+            }
+            else // Add timer for over-time effects
+            {
+                timePair.Add(type, type.lifeTime);
+                debuffs.Add(type, type.stacks);
+            }
         }
     }
 
@@ -130,12 +145,12 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             if (timePair[negative] > 0)
             {
                 timePair[negative] -= Time.deltaTime; // Duration of debuff goes down based on time
-                if (negative.timeSinceTick <= 0) // Check to see if tick has gone off according to the Hazard gameObject
+                if (negative.timeSinceTick <= 0 && negative.overTime) // Check to see if tick has gone off according to the Hazard gameObject
                 {
                     OnHit(negative.damage, Vector3.zero, gameObject);
                     damageMultiplier = negative.damageVulnerability;
 
-                    Debug.Log("Debuffed by " + negative.name);
+                    Debug.Log("Debuffed by " + negative.type);
                 }
             }
             else

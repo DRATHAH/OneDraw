@@ -19056,7 +19056,7 @@ MonoBehaviour:
   damageScale: 1
   damageVulnerability: 1.2
   vulnerabilityScale: 0.2
-  lifeTime: 1
+  lifeTime: 100
   lifeScale: 0.5
   size: 1
   sizeScale: 0.5

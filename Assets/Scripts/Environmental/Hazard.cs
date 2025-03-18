@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hazard : MonoBehaviour
@@ -49,12 +50,12 @@ public class Hazard : MonoBehaviour
 
     float timeAlive = 0;
     bool deactivated = false;
-    SphereCollider col;
+    CapsuleCollider col;
 
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<SphereCollider>();
+        col = GetComponent<CapsuleCollider>();
 
         RaycastHit[] hit = Physics.SphereCastAll(transform.position, col.radius, Vector3.up, 0);
         foreach(RaycastHit raycastHit in hit)
@@ -64,6 +65,16 @@ public class Hazard : MonoBehaviour
             {
                 character.OnHitDot(this);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DamageableCharacter character = other.transform.root.GetComponent<DamageableCharacter>();
+        if (character && character.Targetable)
+        {
+            character.OnHitDot(this);
+            Debug.Log("Debuffed");
         }
     }
 

@@ -56,18 +56,16 @@ public class PlayerMovement : DamageableCharacter
     Rigidbody body;
     #endregion
 
-    void Start()
+    public override void Start()
     {
+        healthManager = HealthManager.instance;
         col = GetComponent<CapsuleCollider>();
         body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        health = PlayerStats.Instance.health;
         maxHealth = PlayerStats.Instance.maxHealth;
-
-        healthManager.setMaxHealth(maxHealth);
-        healthManager.TakeDamage(health);
+        health = PlayerStats.Instance.maxHealth;
 
         vertRot = transform.localEulerAngles.x;
         horRot = transform.localEulerAngles.y;
@@ -77,8 +75,10 @@ public class PlayerMovement : DamageableCharacter
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             Look();
@@ -194,19 +194,15 @@ public class PlayerMovement : DamageableCharacter
 
     public override void OnHit(int damage, Vector3 knockback, GameObject hit)
     {
-        PlayerStats.Instance.health -= damage;
-        Health -= damage;
+        base.OnHit(damage, knockback, hit);
+
         healthManager.TakeDamage(damage);
-        if (rb)
-        {
-            rb.AddForce(knockback, ForceMode.Impulse);
-        }
     }
 
     public override void Heal(int health)
     {
-        PlayerStats.Instance.health += health;
-        Health += health;
+        base.Heal(health);
+
         healthManager.Heal(health);
     }
 }

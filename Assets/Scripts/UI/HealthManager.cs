@@ -5,13 +5,32 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    #region Singleton
+    public static HealthManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of HealthManager found!");
+            return;
+        }
+        instance = this;
+    }
+
+    #endregion
+
     public Image healthBar;
     public int healthAmount = 10;
     public int maxHealth = 10;
+
+    PlayerStats statsManager = PlayerStats.Instance;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthAmount = statsManager.health;
+        maxHealth = statsManager.maxHealth;
     }
 
     // Update is called once per frame
