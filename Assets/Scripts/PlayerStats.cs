@@ -32,8 +32,23 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
+    public PlayerMovement player;
     public int coins = 0;
     public int score = 0;
+
+    public void SetCursorLock(bool locked)
+    {
+        if (locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

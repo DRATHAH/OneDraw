@@ -54,7 +54,7 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponent<PlayerMovement>())
         {
             other.transform.root.GetComponent<PlayerShoot>().hasArrow = true;
             other.transform.root.GetComponent<PlayerShoot>().PlayPickupSound();
@@ -86,7 +86,6 @@ public class Arrow : MonoBehaviour
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
-            Debug.Log(mag/(maxForceVel.magnitude / rb.mass * Time.fixedDeltaTime));
 
             if (!damageable || damageable.health <= 0)
             {
