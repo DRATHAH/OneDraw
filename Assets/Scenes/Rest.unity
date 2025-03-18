@@ -6323,6 +6323,7 @@ MonoBehaviour:
   coins: 0
   score: 0
   health: 0
+  maxHealth: 10
 --- !u!114 &816395860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6927,6 +6928,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916015662}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &937188596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8020833559628956977, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 63327972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &958490783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6574945302965794757, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 63327972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff1452d5d19e094c9ec4d640199437f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &964792232
 GameObject:
   m_ObjectHideFlags: 0
@@ -7808,6 +7825,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092086650}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1116635846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9163698400538296152, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 63327972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1119080549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8389068082393284928, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
@@ -13252,14 +13274,30 @@ PrefabInstance:
       propertyPath: dashMeter
       value: 
       objectReference: {fileID: 1119080549}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: healthManager
+      value: 
+      objectReference: {fileID: 958490783}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: UIText
       value: 
       objectReference: {fileID: 1398461562}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: fireIcon
+      value: 
+      objectReference: {fileID: 937188596}
+    - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: arrowIcon
       value: 
       objectReference: {fileID: 63327973}
+    - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: frostIcon
+      value: 
+      objectReference: {fileID: 1863227346}
+    - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: lightningIcon
+      value: 
+      objectReference: {fileID: 1116635846}
     - target: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: chargeIndicator
       value: 
@@ -16520,6 +16558,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857874182}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1863227346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1590875622598589505, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+  m_PrefabInstance: {fileID: 63327972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1869488184
 GameObject:
   m_ObjectHideFlags: 0

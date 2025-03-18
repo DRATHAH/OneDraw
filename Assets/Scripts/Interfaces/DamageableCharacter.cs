@@ -93,7 +93,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    public void Heal(int health)
+    public virtual void Heal(int health)
     {
         Health += health;
     }

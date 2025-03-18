@@ -28,14 +28,19 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Upgrade Stats")]
     public UpgradeType upgradeType = UpgradeType.frost;
-    public int frostStacks = 0;
-    public int fireStacks = 0;
-    public int lightningStacks = 0;
+    public int frostStacks = PlayerStats.Instance.bow.frostStacks;
+    public int fireStacks = PlayerStats.Instance.bow.fireStacks;
+    public int lightningStacks = PlayerStats.Instance.bow.lightningStacks;
 
     [Header("UI")]
     public TMP_Text chargeIndicator;
     public GameObject UIText;
     public GameObject arrowIcon;
+    public GameObject frostIcon;
+    public GameObject fireIcon;
+    public GameObject lightningIcon;
+
+    [Header("SFX")]
     public AudioSource bowDrawSFX;
     public AudioSource bowShootSFX;
     public AudioSource ArrowPickupSFX;
@@ -95,6 +100,9 @@ public class PlayerShoot : MonoBehaviour
             shootProgress = 0;
         }
         arrowIcon.SetActive(hasArrow);
+        frostIcon.SetActive(frostStacks > 0);
+        fireIcon.SetActive(fireStacks > 0);
+        lightningIcon.SetActive(lightningStacks > 0);
     }
 
     public void PlayPickupSound()
