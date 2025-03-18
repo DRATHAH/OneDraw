@@ -6551,6 +6551,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5986279319677027474, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 5986279319677027474, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 5986279319677027474, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7590708687462417605, guid: a68b8979443a02946b0a42e35640ae1a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
