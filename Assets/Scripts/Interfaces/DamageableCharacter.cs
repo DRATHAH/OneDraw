@@ -82,7 +82,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         lootMap.Add(sameItemList, lootChance[lootChance.Count-1]);
     }
 
-    public void OnHit(int damage, Vector3 knockback, GameObject hit)
+    public virtual void OnHit(int damage, Vector3 knockback, GameObject hit)
     {
         // We can add damage modifiers based off of the 'hit' GameObject using tags
 
