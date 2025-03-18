@@ -47,7 +47,14 @@ public class PlayerMovement : DamageableCharacter
     [Header("Reference Variables")]
     public Transform playerModel;
     public LayerMask groundLayer;
+    #endregion
+
+    #region UI References
+    [Header("UI References")]
+    [Tooltip("Set this to the Dash Meter object in PlayerUI.")]
     public GameObject dashMeter;
+    [Tooltip("Set this to the HealthManager in PlayerUI. Should show the script.")]
+    public HealthManager healthManager;
 
     Slider dashSlider;
     CapsuleCollider col;
@@ -66,6 +73,9 @@ public class PlayerMovement : DamageableCharacter
 
         dashSlider = dashMeter.GetComponent<Slider>();
         dashCDCurrent = dashCooldown;
+
+        healthManager.setMaxHealth(maxHealth);
+        healthManager.TakeDamage(maxHealth - health);
     }
 
     // Update is called once per frame
@@ -179,5 +189,15 @@ public class PlayerMovement : DamageableCharacter
 
         dashCDCurrent = dashCooldown;
         canDash = true;
+    }
+
+    public override void OnHit(int damage, Vector3 knockback, GameObject hit)
+    {
+        Health -= damage;
+        healthManager.TakeDamage(damage);
+        if (rb)
+        {
+            rb.AddForce(knockback, ForceMode.Impulse);
+        }
     }
 }
