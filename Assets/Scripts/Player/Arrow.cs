@@ -6,9 +6,17 @@ public class Arrow : MonoBehaviour
 {
     public int dmg = 1;
     public float knockback = 0;
+    public int frostStacks = 0;
+    public int fireStacks = 0;
+    public int lightningStacks = 0;
     public Vector3 initialForce;
     public Rigidbody rb;
     public Transform lead;
+
+    [Header("Particles")]
+    [SerializeField] GameObject frostParticles;
+    [SerializeField] GameObject fireParticles;
+    [SerializeField] GameObject lightningParticles;
 
     BoxCollider arrowCol;
     bool canHit = true;
@@ -20,8 +28,25 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        frostParticles.SetActive(false);
+        fireParticles.SetActive(false);
+        lightningParticles.SetActive(false);
+
         arrowCol = GetComponent<BoxCollider>();
         rb.AddForce(initialForce);
+
+        if (frostStacks > 0)
+        {
+            frostParticles.SetActive(true);
+        }
+        if (fireStacks > 0)
+        {
+            fireParticles.SetActive(true);
+        }
+        if (lightningStacks > 0)
+        {
+            lightningParticles.SetActive(true);
+        }
     }
 
     private void Update()
@@ -104,11 +129,14 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 origin, float shootForce, float maxForce, int maxDamage, float knockbackForce)
+    public void Initialize(Vector3 origin, float shootForce, float maxForce, int maxDamage, float knockbackForce, int frost, int fire, int lightning)
     {
         initialForce = origin * shootForce;
         maxForceVel = origin * maxForce;
         maxDmg = maxDamage;
         knockback = knockbackForce;
+        frostStacks = frost;
+        fireStacks = fire;
+        lightningStacks = lightning;
     }
 }

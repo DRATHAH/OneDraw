@@ -46,4 +46,9 @@ public class Sensor : MonoBehaviour
         string message = DialogueManager.instance.ReturnTemporaryText(textInt, textType);
         SubtitleManager.instance.SetText(speaker, message);
     }
+
+    public void Refresh()
+    {
+        hasSensed = false;
+    }
 }

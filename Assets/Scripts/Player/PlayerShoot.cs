@@ -5,20 +5,34 @@ using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [Header("Stats")]
     public bool canShoot = true;
     public bool hasArrow = true;
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
     public float spawnOffset;
     public float shootStr = 100f; // How fast the arrow moves when pulled all the way back
-    [Tooltip("Percentile number that determines shoot strength")]
-    public float shootMod = 100;
-    [Tooltip("How fast the player draws the arrow back")]
+    [Tooltip("How fast the player draws the arrow back out of 100. Ex: a value of 25 takes the player 4 seconds to draw all the way.")]
     public float drawSpeed = 25;
     [Tooltip("How much damage the arrow does at max draw strength")]
     public int arrowDamage = 10;
     [Tooltip("How much knockback the arrow inflicts on targets")]
     public float knockbackForce = 0;
+
+    public enum UpgradeType
+    {
+        frost,
+        fire,
+        lightning,
+    }
+
+    [Header("Upgrade Stats")]
+    public UpgradeType upgradeType = UpgradeType.frost;
+    public int frostStacks = 0;
+    public int fireStacks = 0;
+    public int lightningStacks = 0;
+
+    [Header("UI")]
     public TMP_Text chargeIndicator;
     public GameObject UIText;
     public GameObject arrowIcon;
@@ -55,13 +69,13 @@ public class PlayerShoot : MonoBehaviour
                 bowDrawSFX.Play(0);
                 drawAudioPlaying = true;
             }
-            if (shootProgress < shootMod)
+            if (shootProgress < 100)
             {
                 shootProgress += drawSpeed * Time.deltaTime;
             }
-            else if (shootProgress > shootMod)
+            else if (shootProgress > 100)
             {
-                shootProgress = shootMod;
+                shootProgress = 100;
             }
             chargeIndicator.text = (int)shootProgress + "%";
         }
@@ -73,11 +87,11 @@ public class PlayerShoot : MonoBehaviour
             drawAudioPlaying = false;
             bowShootSFX.Play(0);
             hasArrow = false;
-            float speed = shootStr * (shootProgress / shootMod);
-            float knockback = knockbackForce * (shootProgress / shootMod);
+            float speed = shootStr * (shootProgress / 100);
+            float knockback = knockbackForce * (shootProgress / 100);
 
             GameObject arrow = Instantiate(arrowPrefab, arrowSpawn.position + arrowSpawn.forward * spawnOffset, arrowSpawn.rotation);
-            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, shootStr, arrowDamage, knockback);
+            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, shootStr, arrowDamage, knockback, frostStacks, fireStacks, lightningStacks);
             shootProgress = 0;
         }
         arrowIcon.SetActive(hasArrow);

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d378dc2419ddbf44b941689f1c09154b, type: 3}
+  m_Name: Default Bow
+  m_EditorClassIdentifier: 
+  name: Default Bow
+  prefab: {fileID: 0}
+  dmg: 10
+  fireStrength: 3500
+  drawSpeed: 50
+  knockbackForce: 0
+  frostStacks: 0
+  fireStacks: 0
+  lightningStacks: 0
