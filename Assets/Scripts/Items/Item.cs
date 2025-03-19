@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
@@ -15,5 +17,32 @@ public class Item : ScriptableObject
     public virtual void Use()
     {
         Debug.Log("Using " + name);
+
+        // Find which item to actually use
+        string noSpaceName = name.Replace(" ", "");
+        UnityAction useAction = (UnityAction)Delegate.CreateDelegate(typeof(UnityAction), this, noSpaceName);
+        useAction.Invoke();
     }
+
+    #region Item Use Functions
+
+    /*
+     *  ====IMPORTANT====
+     *  
+     *  When making these functions, be sure that the name of the function IS THE SAME NAME as the name VARIABLE of the item
+     *  you are making the function for! Otherwise, you will not be able to use the item!
+     *  
+     */
+
+    void Coin()
+    {
+        PlayerStats.Instance.coins += price;
+    }
+
+    void HealthPotion()
+    {
+        GameManager.instance.player.Heal(2);
+    }
+
+    #endregion
 }

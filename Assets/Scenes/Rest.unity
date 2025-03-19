@@ -32815,7 +32815,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2975675685505128324, guid: b3546f7c13bc909498308be6ff07f578, type: 3}
       propertyPath: m_Name
-      value: SampleItem
+      value: HealthPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154899861839315019, guid: b3546f7c13bc909498308be6ff07f578, type: 3}
+      propertyPath: bobAmount
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7299408880011635658, guid: b3546f7c13bc909498308be6ff07f578, type: 3}
       propertyPath: m_LocalPosition.x

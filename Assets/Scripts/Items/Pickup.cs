@@ -6,47 +6,45 @@ public class Pickup : MonoBehaviour
 {
     public enum PickupType
     {
-        coin = 1,
-        health = 2,
-        crystal = 3,
-        loot = 4,
+        loot = 1,
+        crystal = 2,
     }
-    public PickupType type = PickupType.coin;
-    public int value = 1;
-
-    public float rotSpeed = 1;
-    public float bobSpeed = 1;
-    public float bobAmount = 0.025f;
-    public Transform graphic;
-
-    [Header("Only if 'type' is loot")]
+    public PickupType type = PickupType.loot;
+    [Tooltip("Set true if the pickup is supposed to do something upon being picked up. Ex: a coin immediately gives a player more gold.")]
+    public bool useUponCollection = false;
+    [Tooltip("The item the player will receive/use upon collection.")]
     public Item item;
+    [Tooltip("How many items the player will receive/use upon collection.")]
+    public int value = 1;
+    [Tooltip("How fast the item will rotate on the ground.")]
+    public float rotSpeed = 50;
+    [Tooltip("How fast the item will move up and down on the ground.")]
+    public float bobSpeed = 1;
+    [Tooltip("How far the item will move up and down on the ground.")]
+    public float bobAmount = 0.025f;
+    [Tooltip("The model that moves on the ground.")]
+    public Transform graphic;
 
 
     bool canDestroy = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponent<DamageableCharacter>())
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponent<PlayerMovement>()) // Make sure collider is player
         {
-            if (type == PickupType.coin)
+            for (int i = 0; i < value; i++) // Go through how many items this pickup contains
             {
-                if (PlayerStats.Instance)
+                if (!useUponCollection && item && Inventory.instance.Add(item)) // If there's space for the item, pick it up
                 {
-                    PlayerStats.Instance.coins += value;
-                    Destroy(gameObject);
+                    Debug.Log("Picked up " + item.name);
+                }
+                else if (useUponCollection && item) // Or if the player uses it upon collection
+                {
+                    item.Use();
                 }
             }
-            else if (type == PickupType.health)
-            {
-                other.transform.root.GetComponent<PlayerMovement>().Heal(value);
-                Destroy(gameObject);
-            }
-            else if (type == PickupType.loot && Inventory.instance.Add(item))
-            {
-                Debug.Log("Picked up " + item.name);
-                Destroy(gameObject);
-            }
+
+            Destroy(gameObject);
         }
     }
 
