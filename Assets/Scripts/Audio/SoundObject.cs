@@ -10,7 +10,6 @@ public class SoundObject : MonoBehaviour
 
     public void Initialize(AudioSource soundToPlay)
     {
-        Debug.Log("play");
         sound.clip = soundToPlay.clip;
         float pitch = Random.Range(pitchVariance-pitchVariance, pitchVariance);
         sound.pitch = soundToPlay.pitch + pitch;

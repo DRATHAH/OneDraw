@@ -18,6 +18,6 @@ MonoBehaviour:
   fireStrength: 3500
   drawSpeed: 50
   knockbackForce: 0
-  frostStacks: 1
-  fireStacks: 1
-  lightningStacks: 1
+  frostStacks: 0
+  fireStacks: 0
+  lightningStacks: 0

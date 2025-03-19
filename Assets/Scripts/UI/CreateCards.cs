@@ -54,7 +54,7 @@ public class CreateCards : MonoBehaviour
         {
             Destroy(card.gameObject);
         }
-        Debug.Log("cleared");
+        
         instantiatedCards.Clear();
         GameManager.instance.SetCursorLock(true);
         GameManager.instance.SetPlayerMove(true);

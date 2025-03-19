@@ -41,9 +41,37 @@ public class PlayerStats : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
 
+    public List<HazardStats> hazardTypes = new List<HazardStats>();
+
+    Dictionary<HazardStats.HazardType, HazardStats> stacks = new Dictionary<HazardStats.HazardType, HazardStats>();
+
     // Start is called before the first frame update
     void Start()
     {
+        foreach(HazardStats type in hazardTypes)
+        {
+            HazardStats newStats = (HazardStats)ScriptableObject.CreateInstance(typeof(HazardStats));
+            newStats.type = type.type;
+            newStats.stacks = type.stacks;
+            newStats.stuns = type.stuns;
+            newStats.stunDuration = type.stunDuration;
+            newStats.stunScale = type.stunScale;
+            newStats.damage = type.damage;
+            newStats.damageScale = type.damageScale;
+            newStats.damageVulnerability = type.damageVulnerability;
+            newStats.vulnerabilityScale = type.vulnerabilityScale;
+            newStats.lifeTime = type.lifeTime;
+            newStats.lifeScale = type.lifeScale;
+            newStats.size = type.size;
+            newStats.sizeScale = type.sizeScale;
+            newStats.tickRate = type.tickRate;
+            newStats.tickScale = type.tickScale;
+            newStats.subjectDuration = type.subjectDuration;
+            newStats.subjectScale = type.subjectScale;
+
+            stacks.Add(type.type, newStats);
+        }
+
         if (!bow)
         {
             bow = (Bow)ScriptableObject.CreateInstance(typeof(Bow));
@@ -51,15 +79,12 @@ public class PlayerStats : MonoBehaviour
             bow.fireStrength = defaultBow.fireStrength;
             bow.drawSpeed = defaultBow.drawSpeed;
             bow.knockbackForce = defaultBow.knockbackForce;
-            bow.frostStacks = defaultBow.frostStacks;
-            bow.fireStacks = defaultBow.fireStacks;
-            bow.lightningStacks = defaultBow.lightningStacks;
         }
 
         UpdateBowStats();
     }
 
-    public void ModifyBowStats(int dmgMod, float fireStrengthMod, float drawSpeedMod, float knockbackForceMod, int frostStackMod, int fireStackMod, int lightningStackMod)
+    public void ModifyBowStats(int dmgMod, float fireStrengthMod, float drawSpeedMod, float knockbackForceMod, HazardStats.HazardType typeMod)
     {
         if (bow)
         {
@@ -67,9 +92,14 @@ public class PlayerStats : MonoBehaviour
             bow.fireStrength += fireStrengthMod;
             bow.drawSpeed += drawSpeedMod;
             bow.knockbackForce += knockbackForceMod;
-            bow.frostStacks += frostStackMod;
-            bow.fireStacks += fireStackMod;
-            bow.lightningStacks += lightningStackMod;
+
+            foreach(HazardStats.HazardType type in stacks.Keys)
+            {
+                if (typeMod.Equals(stacks[type].type))
+                {
+                    stacks[type].stacks++;
+                }
+            }
 
             UpdateBowStats();
         }
@@ -78,13 +108,6 @@ public class PlayerStats : MonoBehaviour
     public void UpdateBowStats()
     {
         PlayerShoot shootStats = player.GetComponent<PlayerShoot>();
-        shootStats.arrowDamage = bow.dmg;
-        shootStats.shootStr = bow.fireStrength;
-        shootStats.drawSpeed = bow.drawSpeed;
-        shootStats.frostStacks = bow.frostStacks;
-        shootStats.fireStacks = bow.fireStacks;
-        shootStats.lightningStacks = bow.lightningStacks;
+        shootStats.UpdateStats(bow.dmg, bow.fireStrength, bow.drawSpeed, stacks);
     }
-
-    
 }

@@ -28,17 +28,13 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Upgrade Stats")]
     public UpgradeType upgradeType = UpgradeType.frost;
-    public int frostStacks = 0;
-    public int fireStacks = 0;
-    public int lightningStacks = 0;
+    public List<HazardStats> arrowUpgrades = new List<HazardStats>();
 
     [Header("UI")]
     public TMP_Text chargeIndicator;
     public GameObject UIText;
     public GameObject arrowIcon;
-    public GameObject frostIcon;
-    public GameObject fireIcon;
-    public GameObject lightningIcon;
+    public List<GameObject> elementIcons = new List<GameObject>();
 
     [Header("SFX")]
     public AudioSource bowDrawSFX;
@@ -51,13 +47,16 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach(GameObject icon in elementIcons)
+        {
+            icon.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Cursor.lockState == CursorLockMode.Locked)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Cursor.lockState == CursorLockMode.Locked) // Make sure player isn't interacting with UI or anything else
         {
             canShoot = true;
         }
@@ -85,7 +84,7 @@ public class PlayerShoot : MonoBehaviour
             chargeIndicator.text = (int)shootProgress + "%";
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow && Cursor.lockState == CursorLockMode.Locked && canShoot)
+        if (Input.GetKeyUp(KeyCode.Mouse0) && hasArrow && Cursor.lockState == CursorLockMode.Locked && canShoot) // Shoot bow when mouse button released
         {
             UIText.SetActive(false);
             bowDrawSFX.Stop();
@@ -96,13 +95,39 @@ public class PlayerShoot : MonoBehaviour
             float knockback = knockbackForce * (shootProgress / 100);
 
             GameObject arrow = Instantiate(arrowPrefab, arrowSpawn.position + arrowSpawn.forward * spawnOffset, arrowSpawn.rotation);
-            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, shootStr, arrowDamage, knockback, frostStacks, fireStacks, lightningStacks);
+            arrow.GetComponent<Arrow>().Initialize(arrowSpawn.forward, speed, shootStr, arrowDamage, knockback, arrowUpgrades);
             shootProgress = 0;
         }
         arrowIcon.SetActive(hasArrow);
-        frostIcon.SetActive(frostStacks > 0);
-        fireIcon.SetActive(fireStacks > 0);
-        lightningIcon.SetActive(lightningStacks > 0);
+    }
+
+    public void UpdateStats(int newDmg, float newFireStr, float newDrawSpeed, Dictionary<HazardStats.HazardType, HazardStats> newStacks)
+    {
+        arrowDamage = newDmg;
+        shootStr = newFireStr;
+        drawSpeed = newDrawSpeed;
+
+        arrowUpgrades.Clear(); // Clear previous upgrades
+        foreach (HazardStats.HazardType type in newStacks.Keys)
+        {
+            arrowUpgrades.Add(newStacks[type]);
+        }
+
+        foreach (HazardStats hazard in arrowUpgrades)
+        {
+            foreach (GameObject icon in elementIcons)
+            {
+                if (icon.name.ToLower().Contains(hazard.type.ToString()) && hazard.stacks > 0)
+                {
+                    icon.SetActive(true);
+                    TMP_Text stackNum = icon.GetComponentInChildren<TMP_Text>();
+                    if (stackNum)
+                    {
+                        stackNum.text = hazard.stacks.ToString();
+                    }
+                }
+            }
+        }
     }
 
     public void PlayPickupSound()

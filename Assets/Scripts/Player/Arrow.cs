@@ -16,9 +16,9 @@ public class Arrow : MonoBehaviour
     public UnityEvent hitEvent;
 
     [Header("Particles")]
-    [SerializeField] GameObject frostParticles;
-    [SerializeField] GameObject fireParticles;
-    [SerializeField] GameObject lightningParticles;
+    [SerializeField] List<GameObject> particles = new List<GameObject>();
+    [SerializeField] GameObject hazardPrefab;
+    public List<HazardStats> hazards = new List<HazardStats>();
 
     BoxCollider arrowCol;
     bool canHit = true;
@@ -30,24 +30,23 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frostParticles.SetActive(false);
-        fireParticles.SetActive(false);
-        lightningParticles.SetActive(false);
+        foreach(GameObject p in particles)
+        {
+            p.SetActive(false);
+        }
 
         arrowCol = GetComponent<BoxCollider>();
         rb.AddForce(initialForce);
 
-        if (frostStacks > 0)
+        foreach(GameObject graphic in particles)
         {
-            frostParticles.SetActive(true);
-        }
-        if (fireStacks > 0)
-        {
-            fireParticles.SetActive(true);
-        }
-        if (lightningStacks > 0)
-        {
-            lightningParticles.SetActive(true);
+            foreach(HazardStats haz in hazards)
+            {
+                if (haz.stacks > 0 && graphic.name.ToLower().Contains(haz.type.ToString()))
+                {
+                    graphic.SetActive(true);
+                }
+            }
         }
     }
 
@@ -62,8 +61,11 @@ public class Arrow : MonoBehaviour
         {
             // Makes arrow face direction it is moving
             Vector3 direction = ((transform.position + transform.forward * 0.5f + rb.velocity) - lead.position).normalized;
-            Quaternion lookRot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5);
+            if (direction.magnitude > 0)
+            {
+                Quaternion lookRot = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5);
+            }
 
             // Calculates damage based on speed of arrow
             if (rb.velocity.magnitude > 0)
@@ -120,6 +122,15 @@ public class Arrow : MonoBehaviour
                 arrowCol.isTrigger = false;
                 rb.isKinematic = false;
             }
+
+            foreach (HazardStats stat in hazards)
+            {
+                if (stat.stacks > 0)
+                {
+                    GameObject zone = Instantiate(hazardPrefab, transform.position, Quaternion.identity);
+                    zone.GetComponent<Hazard>().Initialize(stat);
+                }
+            }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
@@ -128,22 +139,28 @@ public class Arrow : MonoBehaviour
             rb.velocity = Vector3.zero;
             arrowCol.isTrigger = true;
             rb.isKinematic = true;
-        }
 
-        if (frostStacks > 0)
-        {
-
+            foreach (HazardStats stat in hazards)
+            {
+                if (stat.stacks > 0)
+                {
+                    GameObject zone = Instantiate(hazardPrefab, transform.position, Quaternion.identity);
+                    zone.GetComponent<Hazard>().Initialize(stat);
+                }
+            }
         }
     }
 
-    public void Initialize(Vector3 origin, float shootForce, float maxForce, int maxDamage, float knockbackForce, int frost, int fire, int lightning)
+    public void Initialize(Vector3 origin, float shootForce, float maxForce, int maxDamage, float knockbackForce, List<HazardStats> upgrades)
     {
         initialForce = origin * shootForce;
         maxForceVel = origin * maxForce;
         maxDmg = maxDamage;
         knockback = knockbackForce;
-        frostStacks = frost;
-        fireStacks = fire;
-        lightningStacks = lightning;
+
+        foreach (HazardStats haz in upgrades)
+        {
+            hazards.Add(haz);
+        }
     }
 }

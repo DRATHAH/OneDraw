@@ -189,9 +189,7 @@ MonoBehaviour:
   fireStrength: 0
   drawSpeed: 0
   knockbackForce: 0
-  frostStacks: 0
-  fireStacks: 1
-  lightningStacks: 0
+  type: 1
 --- !u!1 &8761015242985380895
 GameObject:
   m_ObjectHideFlags: 0

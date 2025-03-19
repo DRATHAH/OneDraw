@@ -11,9 +11,7 @@ public class UpgradeCard : MonoBehaviour
     public float fireStrength = 0;
     public float drawSpeed = 0;
     public float knockbackForce = 0;
-    public int frostStacks = 0;
-    public int fireStacks = 0;
-    public int lightningStacks = 0;
+    public HazardStats.HazardType type = HazardStats.HazardType.frost;
 
     private void Start()
     {
@@ -22,6 +20,6 @@ public class UpgradeCard : MonoBehaviour
 
     public void SendStats()
     {
-        PlayerStats.Instance.ModifyBowStats(damage, fireStrength, drawSpeed, knockbackForce, frostStacks, fireStacks, lightningStacks);
+        PlayerStats.Instance.ModifyBowStats(damage, fireStrength, drawSpeed, knockbackForce, type);
     }
 }

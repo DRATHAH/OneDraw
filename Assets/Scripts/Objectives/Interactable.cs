@@ -48,7 +48,6 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("exit");
         if (other.GetComponent<PlayerMovement>() && canInteract)
         {
             hasPlayer = false;
