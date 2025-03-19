@@ -42,16 +42,16 @@ public class SubtitleManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate() // Makes sure it runs after the Update method in player shoot, so the player doesn't start drawing an arrow the moment interactio ends
     {
         if (messageText.text.Contains("hide"))
         {
-            speakerText.text = "lol";
-            messageText.text = "lol";
+            speakerText.text = " ";
+            messageText.text = " ";
             visible.SetActive(false);
         }
 
-        if (Input.GetMouseButtonDown(0) && visible.activeSelf)
+        if (Input.GetMouseButtonDown(0) && visible.activeSelf) // When the player clicks and text is currently displayed
         {
             NextText();
         }
@@ -59,35 +59,35 @@ public class SubtitleManager : MonoBehaviour
 
     public void NextText()
     {
-        if (dialogueManager && dialogueManager.CanForward() && subtitles.finished)
+        if (dialogueManager && dialogueManager.CanForward() && subtitles.finished) // If text has finished typing and there's more to show, display the next text
         {
             GameManager.instance.SetCursorLock(false);
             dialogueManager.GetContinueState();
             SetText(dialogueManager.speaker, dialogueManager.ReturnText());
         }
-        else if (dialogueManager && subtitles.finished)
+        else if (dialogueManager && subtitles.finished) // Run any necessary events after the player is done reading text 
         {
             dialogueManager.CheckEvents(dialogueManager.textType);
         }
-        else if (dialogueManager && !subtitles.finished)
+        else if (dialogueManager && !subtitles.finished) // If the text is still being typed, fast-forward the text to display it all
         {
             FinishText(dialogueManager.speaker, dialogueManager.ReturnText());
         }
-        else if (dialogueManager)
+        else if (dialogueManager) // Hide the text once it is finished
         {
             speaker.HideText(speakerText);
             subtitles.HideText(messageText);
         }
     }
 
-    public void SetText(string speak, string msg)
+    public void SetText(string speak, string msg) // Display next text method
     {
         visible.SetActive(true);
         speaker.AddWriter(speakerText, speak, time, true);
         subtitles.AddWriter(messageText, msg, time, true);
     }
 
-    public void FinishText(string speak, string msg)
+    public void FinishText(string speak, string msg) // Skip text method
     {
         visible.SetActive(true);
         speaker.SetDialogue(speakerText, speak);

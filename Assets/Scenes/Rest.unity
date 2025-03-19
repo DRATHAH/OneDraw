@@ -2774,10 +2774,9 @@ MonoBehaviour:
   damageVulnerability: 1
   lifeTime: 100
   size: 1
-  overTime: 0
-  tickRate: 1
+  overTime: 1
+  tickRate: 0.5
   subjectDuration: 5
-  col: {fileID: 330975750}
 --- !u!136 &330975750
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4990,18 +4989,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1160192639}
-        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1186399145}
         m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
         m_MethodName: Play
@@ -5013,6 +5000,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1160192639}
+        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
   cutsceneLines:
   - The Holy Conclave consists of priests, clerics, and paladins sworn to protect
@@ -13369,6 +13368,18 @@ MonoBehaviour:
   leaveEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 63327975}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 593809224}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetPlayerMove
@@ -13384,18 +13395,6 @@ MonoBehaviour:
       - m_Target: {fileID: 593809224}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetCursorLock
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 63327975}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24172,10 +24171,9 @@ MonoBehaviour:
   damageVulnerability: 1.2
   lifeTime: 100
   size: 1
-  overTime: 0
+  overTime: 1
   tickRate: 1
   subjectDuration: 5
-  col: {fileID: 0}
 --- !u!136 &1360208949
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24338,7 +24336,6 @@ MonoBehaviour:
   overTime: 0
   tickRate: 1
   subjectDuration: 0
-  col: {fileID: 0}
 --- !u!1 &1496880616
 GameObject:
   m_ObjectHideFlags: 0
@@ -26690,63 +26687,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!1001 &1780669281
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.316232
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.2356734
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 421232712268540461, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3110715423226607185, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
-      propertyPath: m_Name
-      value: Arrow
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c99a3ce194377604ba59eb067323cce5, type: 3}
 --- !u!1 &1815750987
 GameObject:
   m_ObjectHideFlags: 0
@@ -32942,7 +32882,6 @@ SceneRoots:
   - {fileID: 511325646}
   - {fileID: 4958748743415526532}
   - {fileID: 76300816}
-  - {fileID: 1780669281}
   - {fileID: 1483186496}
   - {fileID: 1360208950}
   - {fileID: 330975751}

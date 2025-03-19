@@ -121,24 +121,24 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
             foreach (Hazard hazard in debuffs.Keys)
             {
-                if (hazard.type == type.type && debuffs[hazard] >= type.stacks) // If debuff is same type and stronger or the same, only refresh the timer
+                if (hazard.type == type.type && debuffs[hazard] >= type.stacks && !tempStacks.ContainsKey(type)) // If debuff is same type and weaker or the same, only refresh the timer
                 {
                     timePair[hazard] = hazard.subjectDuration;
-                    Debug.Log("Refreshed " + type.type);
+                    Debug.Log("Refreshed " + hazard.type + ": " + hazard.stacks + " stacks.");
                 }
-                else if (debuffs[hazard] < type.stacks && hazard.type == type.type) // If new debuff is the same but stronger than previous debuff
+                else if (debuffs[hazard] < type.stacks && hazard.type == type.type && !tempStacks.ContainsKey(type)) // If new debuff is the same but stronger than previous debuff
                 {
                     // Remove weaker debuff
                     toRemove.Add(hazard);
 
                     // Apply more powerful debuff
                     tempStacks.Add(type, type.stacks);
-                    Debug.Log("Superceded " + type.type);
+                    Debug.Log("Superceded " + type.type + ": " + type.stacks + " stacks.");
                 }
-                else // Add a brand new debuff
+                else if (!tempStacks.ContainsKey(type)) // Add a brand new debuff
                 {
                     tempStacks.Add(type, type.stacks);
-                    Debug.Log("Added new  " + type.type);
+                    Debug.Log("Added new " + type.type + ": " + type.stacks + " stacks.");
                 }
             }
 
@@ -150,15 +150,18 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
             foreach (Hazard toAdd in tempStacks.Keys)
             {
-                debuffs.Add(toAdd, tempStacks[toAdd]);
-                timePair.Add(toAdd, toAdd.subjectDuration);
+                if (!debuffs.ContainsKey(toAdd))
+                {
+                    debuffs.Add(toAdd, tempStacks[toAdd]);
+                    timePair.Add(toAdd, toAdd.subjectDuration);
+                }
             }
         }
         else // Apply first debuff to character
         {
             timePair.Add(type, type.subjectDuration);
             debuffs.Add(type, type.stacks);
-            Debug.Log("Added first " + type.type);
+            Debug.Log("Added first " + type.type + ": " + type.stacks + " stacks.");
         }
     }
 
@@ -171,7 +174,10 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             StartCoroutine(StunRecover(type.stunDuration));
         }
 
-        Debug.Log(gameObject.name + " debuffed over time by " + type.type + ", " + Mathf.Round(timePair[type] * 100) / 100);
+        if (timePair.ContainsKey(type))
+        {
+            Debug.Log(gameObject.name + " debuffed by " + type.type + ", " + Mathf.Round(timePair[type] * 100) / 100);
+        }
     }
 
     public virtual void RemoveDebuff(Hazard type)

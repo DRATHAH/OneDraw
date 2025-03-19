@@ -22,7 +22,7 @@ public class Hazard : MonoBehaviour
     [Tooltip("Damage of initial entrance and DoT effects.")]
     public int damage = 0;
     [Tooltip("How much more damage an object will take. Ex: a value of 2 = x2 damage.")]
-    public float damageVulnerability = 0;
+    public float damageVulnerability = 1;
 
     [Header("Hazard Stats")]
     [Tooltip("How long the effect lasts on the ground.")]
@@ -42,7 +42,7 @@ public class Hazard : MonoBehaviour
 
     float timeAlive = 0;
     bool deactivated = false;
-    [SerializeField] CapsuleCollider col;
+    CapsuleCollider col;
 
     List<DamageableCharacter> characters = new List<DamageableCharacter>(); // List of targets currently affected by hazard's debuff
 
@@ -86,9 +86,9 @@ public class Hazard : MonoBehaviour
         DamageableCharacter character = other.transform.root.GetComponent<DamageableCharacter>();
         if (character && character.Targetable && !characters.Contains(character))
         {
+            characters.Add(character);
             character.ApplyDebuff(this);
             character.DebuffHit(this);
-            characters.Add(character);
         }
         else if (characters.Contains(character) && character.timePair.ContainsKey(this) && character.timePair[this] > 0)
         {
@@ -131,7 +131,7 @@ public class Hazard : MonoBehaviour
 
         if (tickRate <= 0) // Makes sure tick rate doesn't go below 0 and cause weird glitches
         {
-            tickRate = 0.05f;
+            tickRate = 0.1f;
         }
 
         if (subjectDuration == 0) // Make sure debuff is only applied upon entering the hazard
