@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d12ffc422c265747b42ef7539c39557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchVariance: 0.1
+  pitchVariance: 0.2
   sound: {fileID: 8048782604733513059}
 --- !u!82 &8048782604733513059
 AudioSource:

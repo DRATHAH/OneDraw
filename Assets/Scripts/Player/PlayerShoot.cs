@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
     public bool hasArrow = true;
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
+    public GameObject soundParticle;
     public float spawnOffset;
     public float shootStr = 100f; // How fast the arrow moves when pulled all the way back
     [Tooltip("How fast the player draws the arrow back out of 100. Ex: a value of 25 takes the player 4 seconds to draw all the way.")]
@@ -70,7 +71,7 @@ public class PlayerShoot : MonoBehaviour
             UIText.SetActive(true);
             if (!drawAudioPlaying)
             {
-                bowDrawSFX.Play(0);
+                bowDrawSFX.Play();
                 drawAudioPlaying = true;
             }
             if (shootProgress < 100)
@@ -89,7 +90,10 @@ public class PlayerShoot : MonoBehaviour
             UIText.SetActive(false);
             bowDrawSFX.Stop();
             drawAudioPlaying = false;
-            bowShootSFX.Play(0);
+
+            GameObject sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+            sound.GetComponent<SoundObject>().Initialize(bowShootSFX);
+
             hasArrow = false;
             float speed = shootStr * (shootProgress / 100);
             float knockback = knockbackForce * (shootProgress / 100);

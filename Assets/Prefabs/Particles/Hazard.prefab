@@ -670,7 +670,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 0.1, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 10, y: 10, z: 1}
     placementMode: 0
@@ -1662,7 +1662,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1715,9 +1715,9 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalY:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 10
+      minScalar: -10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1768,7 +1768,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -4088,20 +4088,29 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          inSlope: 2.3341522
+          outSlope: 2.3341522
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0.23349895
         - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          time: 0.4958886
+          value: 0.7261246
+          inSlope: -0.19534431
+          outSlope: -0.19534431
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
+          outWeight: 0.23784588
+        - serializedVersion: 3
+          time: 1
+          value: 0.21621704
+          inSlope: -1.7481229
+          outSlope: -1.7481229
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.24535109
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -5510,7 +5519,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 0.1, z: 0}
     m_Rotation: {x: -90, y: 0, z: 0}
     m_Scale: {x: 1.5, y: 1.5, z: 0.25}
     placementMode: 0
@@ -10344,15 +10353,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 16
+    type: 17
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 0.1, z: 0}
     m_Rotation: {x: -90, y: 0, z: 0}
-    m_Scale: {x: 1.5, y: 1.5, z: 0.5}
+    m_Scale: {x: 1, y: 1, z: 1.5}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -14605,6 +14614,5 @@ MonoBehaviour:
   lifeTime: 100
   size: 1
   overTime: 1
-  tickRate: 1
+  tickRate: 1.5
   subjectDuration: 5
-  col: {fileID: 0}

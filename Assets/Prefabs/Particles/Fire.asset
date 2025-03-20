@@ -19,7 +19,7 @@ MonoBehaviour:
   stunScale: 0
   damage: 1
   damageScale: 0.1
-  damageVulnerability: 0
+  damageVulnerability: 1
   vulnerabilityScale: 0
   lifeTime: 0.5
   lifeScale: 0.15
