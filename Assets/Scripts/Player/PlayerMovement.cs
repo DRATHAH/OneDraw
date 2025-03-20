@@ -183,7 +183,17 @@ public class PlayerMovement : DamageableCharacter
     
     IEnumerator Dash()
     {
-        body.AddForce(new Vector3(playerModel.forward.x * dashSpeed, 0f, playerModel.forward.z * dashSpeed), ForceMode.Impulse);
+        Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
+        Vector3 movement = yaw * new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        body.AddForce(new Vector3(movement.x * dashSpeed, 0f, movement.z * dashSpeed), ForceMode.Impulse);
+        Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
+        if (flatVel.magnitude > dashSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
+        }
+
         yield return new WaitForSeconds (dashTime);
 
         dashCDCurrent = 0;
@@ -198,13 +208,13 @@ public class PlayerMovement : DamageableCharacter
     {
         base.OnHit(damage, knockback, hit);
 
-        healthManager.TakeDamage(damage);
+        healthManager.UpdateHealthBar(health);
     }
 
-    public override void Heal(int health)
+    public override void Heal(int heals)
     {
-        base.Heal(health);
+        base.Heal(heals);
 
-        healthManager.Heal(health);
+        healthManager.UpdateHealthBar(health);
     }
 }

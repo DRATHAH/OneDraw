@@ -33,9 +33,9 @@ RectTransform:
   m_Father: {fileID: 7330059011038305811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 75}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8284662089028066813
 CanvasRenderer:
@@ -134,6 +134,81 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &367671596033546120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5946207658540016861}
+  - component: {fileID: 4316738413354011285}
+  - component: {fileID: 4549736793959295095}
+  m_Layer: 0
+  m_Name: Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5946207658540016861
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367671596033546120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7330059011038305811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4316738413354011285
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367671596033546120}
+  m_CullTransparentMesh: 1
+--- !u!114 &4549736793959295095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367671596033546120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b4d24306125a25b43b112b4039b5ce5d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2697856758229874472
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,15 +258,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f155e3366739b1545a90a9514b9bc68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: Frost
+  stats: {fileID: 11400000, guid: cfddc58addb27d64e9597143b1c033b7, type: 2}
   text: {fileID: 6840759678780741751}
+  buttonBackground: {fileID: 682309992340470824}
+  icon: {fileID: 4549736793959295095}
+  cardIcons:
+  - {fileID: 21300000, guid: b4d24306125a25b43b112b4039b5ce5d, type: 3}
+  - {fileID: 21300000, guid: 8958d448499c3804a8693bd55d0e948e, type: 3}
+  - {fileID: 21300000, guid: bc9df52e8b18ea849a048490c4260da8, type: 3}
+  cardColors:
+  - {r: 0.7960785, g: 0.82745105, b: 0.91372555, a: 1}
+  - {r: 0.9960785, g: 0.96470594, b: 0.7411765, a: 1}
+  - {r: 0.76470596, g: 0.7137255, b: 0.85098046, a: 1}
   damage: 0
   fireStrength: 0
   drawSpeed: 0
   knockbackForce: 0
-  frostStacks: 0
-  fireStacks: 0
-  lightningStacks: 0
 --- !u!1 &8761015242985380895
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +305,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5946207658540016861}
   - {fileID: 7422978853611716088}
   m_Father: {fileID: 341855022175643247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -252,15 +335,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8000001, g: 0.8313726, b: 0.9176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

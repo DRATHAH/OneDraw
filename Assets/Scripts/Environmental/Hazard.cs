@@ -46,6 +46,39 @@ public class Hazard : MonoBehaviour
 
     List<DamageableCharacter> characters = new List<DamageableCharacter>(); // List of targets currently affected by hazard's debuff
 
+    public void Initialize(HazardStats baseStats) // Sets stats for the hazard
+    {
+        type = baseStats.type;
+
+        stacks = baseStats.stacks;
+        stuns = baseStats.stuns;
+        stunDuration = baseStats.stunDuration;
+        damage = baseStats.damage + (int)((stacks - 1) * baseStats.damageScale + .5f);
+        damageVulnerability = baseStats.damageVulnerability + ((stacks - 1) * baseStats.vulnerabilityScale);
+        lifeTime = baseStats.lifeTime + ((stacks - 1) * baseStats.lifeScale);
+        size = baseStats.size + ((stacks - 1) * baseStats.sizeScale);
+        tickRate = baseStats.tickRate - ((stacks - 1) * baseStats.tickScale);
+        subjectDuration = baseStats.subjectDuration + ((stacks - 1) * baseStats.subjectScale);
+
+        overTime = subjectDuration > 0;
+
+
+        if (!overTime) // For reapplying debuffs while standing in the hazard
+        {
+            tickRate = 1;
+        }
+
+        if (tickRate <= 0) // Makes sure tick rate doesn't go below 0 and cause weird glitches
+        {
+            tickRate = 0.1f;
+        }
+
+        if (subjectDuration == 0) // Make sure debuff is only applied upon entering the hazard
+        {
+            subjectDuration = -1;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +123,7 @@ public class Hazard : MonoBehaviour
             character.ApplyDebuff(this);
             character.DebuffHit(this);
         }
-        else if (characters.Contains(character) && character.timePair.ContainsKey(this) && character.timePair[this] > 0)
+        else if (characters.Contains(character) && character.timePair.ContainsKey(this) && character.timePair[this] > 0) // If target walks inside after leaving and still being debuffed
         {
             character.ApplyDebuff(this);
         }
@@ -104,39 +137,6 @@ public class Hazard : MonoBehaviour
         {
             character.RemoveDebuff(this);
             characters.Remove(character);
-        }
-    }
-
-    public void Initialize(HazardStats baseStats) // Sets stats for the hazard
-    {
-        type = baseStats.type;
-
-        stacks = baseStats.stacks;
-        stuns = baseStats.stuns;
-        stunDuration = baseStats.stunDuration;
-        damage = baseStats.damage + (int)((stacks - 1) * baseStats.damageScale + .5f);
-        damageVulnerability = baseStats.damageVulnerability + ((stacks - 1) * baseStats.vulnerabilityScale);
-        lifeTime = baseStats.lifeTime + ((stacks - 1) * baseStats.lifeScale);
-        size = baseStats.size + ((stacks - 1) * baseStats.sizeScale);
-        tickRate = baseStats.tickRate - ((stacks - 1) * baseStats.tickScale);
-        subjectDuration = baseStats.subjectDuration + ((stacks - 1) * baseStats.subjectScale);
-
-        overTime = subjectDuration > 0;
-
-
-        if (!overTime) // For reapplying debuffs while standing in the hazard
-        {
-            tickRate = 1;
-        }
-
-        if (tickRate <= 0) // Makes sure tick rate doesn't go below 0 and cause weird glitches
-        {
-            tickRate = 0.1f;
-        }
-
-        if (subjectDuration == 0) // Make sure debuff is only applied upon entering the hazard
-        {
-            subjectDuration = -1;
         }
     }
 

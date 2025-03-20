@@ -11,6 +11,9 @@ public class Item : ScriptableObject
     public int id = 0;
     [TextArea]
     public string desc;
+    [Tooltip("If a consumable, the value that it gives upon consumption")]
+    public float value = 5;
+    [Tooltip("How much item sells for.")]
     public int price = 0;
     public bool isDefaultItem = false;
 
@@ -36,12 +39,12 @@ public class Item : ScriptableObject
 
     void Coin()
     {
-        PlayerStats.Instance.coins += price;
+        PlayerStats.Instance.UpdateCoins(price);
     }
 
     void HealthPotion()
     {
-        GameManager.instance.player.Heal(2);
+        GameManager.instance.player.Heal((int)value);
     }
 
     #endregion

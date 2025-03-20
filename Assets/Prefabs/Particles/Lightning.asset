@@ -25,7 +25,7 @@ MonoBehaviour:
   lifeScale: 0.1
   size: 1
   sizeScale: 0.15
-  tickRate: 5
-  tickScale: 0.2
+  tickRate: 1.5
+  tickScale: 0
   subjectDuration: 0
   subjectScale: 0.1

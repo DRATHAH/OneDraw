@@ -217,7 +217,7 @@ MonoBehaviour:
   value: 1
   rotSpeed: 50
   bobSpeed: 2
-  bobAmount: 0.05
+  bobAmount: 0.1
   graphic: {fileID: 8671922012037128161}
 --- !u!135 &4095920101884313876
 SphereCollider:
