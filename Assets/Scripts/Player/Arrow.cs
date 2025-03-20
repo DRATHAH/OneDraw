@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,8 @@ public class Arrow : MonoBehaviour
     public Vector3 initialForce;
     public Rigidbody rb;
     public Transform lead;
+    [Tooltip("Layers that the arrow can collide with.")]
+    public LayerMask collisionLayers;
     public UnityEvent hitEvent;
 
     [Header("Particles")]
@@ -79,6 +82,14 @@ public class Arrow : MonoBehaviour
                 }
             }
         }
+
+        RaycastHit[] hit = Physics.BoxCastAll(transform.position, arrowCol.size/2, transform.forward, transform.rotation, 1, collisionLayers, QueryTriggerInteraction.Ignore);
+        if (hit.Length == 0 && !canHit)
+        {
+            canHit = true;
+            arrowCol.isTrigger = false;
+            rb.isKinematic = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,16 +99,6 @@ public class Arrow : MonoBehaviour
             other.transform.root.GetComponent<PlayerShoot>().hasArrow = true;
             other.transform.root.GetComponent<PlayerShoot>().PlayPickupSound();
             Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.isTrigger)
-        {
-            canHit = true;
-            arrowCol.isTrigger = false;
-            rb.isKinematic = false;
         }
     }
 
@@ -115,13 +116,6 @@ public class Arrow : MonoBehaviour
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
-
-            if (!damageable || damageable.health <= 0)
-            {
-                canHit = true;
-                arrowCol.isTrigger = false;
-                rb.isKinematic = false;
-            }
 
             foreach (HazardStats stat in hazards)
             {

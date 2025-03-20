@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Frost
   m_EditorClassIdentifier: 
   type: 0
-  stacks: 10
+  stacks: 0
   stuns: 0
   stunDuration: 0
   stunScale: 0

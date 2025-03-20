@@ -124,7 +124,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                 if (hazard.type == type.type && debuffs[hazard] >= type.stacks && !tempStacks.ContainsKey(type)) // If debuff is same type and weaker or the same, only refresh the timer
                 {
                     timePair[hazard] = hazard.subjectDuration;
-                    Debug.Log("Refreshed " + hazard.type + ": " + hazard.stacks + " stacks.");
+                    //Debug.Log("Refreshed " + hazard.type + ": " + hazard.stacks + " stacks.");
                 }
                 else if (debuffs[hazard] < type.stacks && hazard.type == type.type && !tempStacks.ContainsKey(type)) // If new debuff is the same but stronger than previous debuff
                 {
@@ -133,12 +133,12 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
                     // Apply more powerful debuff
                     tempStacks.Add(type, type.stacks);
-                    Debug.Log("Superceded " + type.type + ": " + type.stacks + " stacks.");
+                    //Debug.Log("Superceded " + type.type + ": " + type.stacks + " stacks.");
                 }
                 else if (!tempStacks.ContainsKey(type)) // Add a brand new debuff
                 {
                     tempStacks.Add(type, type.stacks);
-                    Debug.Log("Added new " + type.type + ": " + type.stacks + " stacks.");
+                    //Debug.Log("Added new " + type.type + ": " + type.stacks + " stacks.");
                 }
             }
 
@@ -161,7 +161,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         {
             timePair.Add(type, type.subjectDuration);
             debuffs.Add(type, type.stacks);
-            Debug.Log("Added first " + type.type + ": " + type.stacks + " stacks.");
+            //Debug.Log("Added first " + type.type + ": " + type.stacks + " stacks.");
         }
     }
 
@@ -176,7 +176,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
         if (timePair.ContainsKey(type))
         {
-            Debug.Log(gameObject.name + " debuffed by " + type.type + ", " + Mathf.Round(timePair[type] * 100) / 100);
+            Debug.Log(gameObject.name + " debuffed by " + type.type + " [" + type.stacks + "] for " + Mathf.Round(timePair[type] * 100) / 100);
         }
     }
 
@@ -186,7 +186,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
         if (debuffs.ContainsKey(type)) // If debuff is currently affecting character
         {
-            Debug.Log(type.type + " removed");
+            //Debug.Log(type.type + " removed");
 
             toRemove.Add(type);
 
