@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public PlayerMovement player;
+    public Camera playerCamera;
 
     public void SetCursorLock(bool locked)
     {
@@ -39,5 +40,25 @@ public class GameManager : MonoBehaviour
     public void SetPlayerMove(bool canMove)
     {
         player.canMove = canMove;
+    }
+
+    public void PauseTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeTime()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    public void SetSensitivity(float level)
+    {
+        player.sensitivity = level;
+    }
+
+    public void SetFOV(float level)
+    {
+        playerCamera.fieldOfView = (int)level;
     }
 }

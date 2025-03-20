@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: db38f0bd7fc473348a39e97cf6903aa1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Crystal Test.unity
     guid: 76af0cf4bd1f942429e26eb943798f7d
+  - enabled: 1
+    path: Assets/Scenes/Rest.unity
+    guid: 4211faa5d7254fe4d9427b476b298233
   m_configObjects: {}
