@@ -85,7 +85,7 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        if (canInteract && Input.GetKeyDown(KeyCode.E) && hasPlayer && isFacing)
+        if (!interacting && canInteract && Input.GetKeyDown(KeyCode.E) && hasPlayer && isFacing)
         {
             Interact();
             promptCanvas.SetActive(false);
@@ -94,19 +94,17 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
-        if (!interacting)
-        {
-            interacting = true;
-            interactEvent.Invoke();
-            Debug.Log("Interacted with " + gameObject.name);
-        }
-        else
-        {
-            interacting = false;
-            leaveEvent.Invoke();
-            StartCoroutine(AllowShoot());
-            Debug.Log("Stopping interaction");
-        }
+        interacting = true;
+        interactEvent.Invoke();
+        Debug.Log("Interacted with " + gameObject.name);
+    }
+
+    public void EndInteract()
+    {
+        interacting = false;
+        leaveEvent.Invoke();
+        StartCoroutine(AllowShoot());
+        Debug.Log("Stopping interaction");
     }
 
     IEnumerator AllowShoot()
