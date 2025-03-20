@@ -5,11 +5,16 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     bool isPaused = false;
+    GameManager gameManager;
 
-    public GameManager gameManager;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public GameObject pauseButtonsMenu;
+
+    private void Start()
+    {
+        gameManager = GameManager.instance;
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,7 +36,6 @@ public class PauseManager : MonoBehaviour
             settingsMenu.SetActive(false);
             pauseButtonsMenu.SetActive(true);
             pauseMenu.SetActive(false);
-            StartCoroutine(AllowShoot());
         }
         else
         {
@@ -42,10 +46,5 @@ public class PauseManager : MonoBehaviour
             pauseMenu.SetActive(true);
             
         }
-    }
-
-    IEnumerator AllowShoot()
-    {
-        yield return new WaitForSeconds(.01f);
     }
 }
