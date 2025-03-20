@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class CreateCards : MonoBehaviour
 {
     public Transform cardParent;
-    public List<UpgradeCard> cards = new List<UpgradeCard>();
+    public GameObject cardPrefab;
+    [Tooltip("Every card type the upgrade altar can provide.")]
+    public List<HazardStats> cards = new List<HazardStats>();
     public int limit = 3;
     public UnityEvent onUpgradeEvents;
 
@@ -16,34 +18,39 @@ public class CreateCards : MonoBehaviour
 
     public void CreateCardList()
     {
-        if (limit > cards.Count)
+        if (limit > cards.Count) // If there are more available cards to make than to be spawned
         {
-            for (int i = 0; i < limit; i++)
+            while (instantiatedCards.Count < limit)
             {
                 int random = Random.Range(0, cards.Count);
                 foreach (UpgradeCard tempCard in instantiatedCards)
                 {
-                    if (tempCard.cardName.Equals(cards[i].cardName))
+                    if (tempCard.stats.type.Equals(cards[random].type))
                     {
-                        CreateCardList();
                         return;
                     }
                 }
 
-                GameObject card = Instantiate(cards[random].gameObject, cardParent.position, Quaternion.identity, cardParent);
+                GameObject card = Instantiate(cardPrefab, cardParent.position, Quaternion.identity, cardParent);
+                UpgradeCard upgradeCard = card.GetComponent<UpgradeCard>();
                 UnityEngine.UI.Button button = card.GetComponentInChildren<UnityEngine.UI.Button>();
                 button.onClick.AddListener(delegate { ClearCards(); }); // Adds the ClearCards method to all cards when pressed
-                instantiatedCards.Add(card.GetComponent<UpgradeCard>());
+                upgradeCard.Initialize(cards[random]);
+
+                instantiatedCards.Add(upgradeCard);
             }
         }
-        else
+        else // Create a list of all available cards
         {
-            foreach(UpgradeCard entry in cards)
+            foreach(HazardStats entry in cards)
             {
-                GameObject card = Instantiate(entry.gameObject, cardParent.position, Quaternion.identity, cardParent);
+                GameObject card = Instantiate(cardPrefab, cardParent.position, Quaternion.identity, cardParent);
+                UpgradeCard upgradeCard = card.GetComponent<UpgradeCard>();
                 UnityEngine.UI.Button button = card.GetComponentInChildren<UnityEngine.UI.Button>();
                 button.onClick.AddListener(delegate { ClearCards(); }); // Adds the ClearCards method to all cards when pressed
-                instantiatedCards.Add(card.GetComponent<UpgradeCard>());
+                upgradeCard.Initialize(entry);
+
+                instantiatedCards.Add(upgradeCard);
             }
         }
     }

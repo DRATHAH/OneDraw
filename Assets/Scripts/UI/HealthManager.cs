@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class HealthManager : MonoBehaviour
     #endregion
 
     public Image healthBar;
+    public TMP_Text coinCounter;
     public int healthAmount = 10;
     public int maxHealth = 10;
 
@@ -31,73 +33,19 @@ public class HealthManager : MonoBehaviour
     {
         statsManager = PlayerStats.Instance;
 
+        coinCounter.text = statsManager.coins.ToString();
         healthAmount = statsManager.health;
         maxHealth = statsManager.maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Heal(1);
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            GainMaxHealth(1);
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            LoseMaxHealth(1);
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        healthAmount -= damage;
-        UpdateHealthBar();
-    }
-
-    public void Heal(int healAmount)
-    {
-        healthAmount += healAmount;
-        ClampHealth();
-        UpdateHealthBar();
-    }
-
-    public void GainMaxHealth(int gainAmount)
-    {
-        maxHealth += gainAmount;
-        UpdateHealthBar();
-    }
-
-    public void LoseMaxHealth(int loseAmount)
-    {
-        maxHealth -= loseAmount;
-        ClampHealth();
-        UpdateHealthBar();
-    }
-
-    public void setMaxHealth(int amount)
-    {
-        maxHealth = amount;
-        ClampHealth();
-        UpdateHealthBar();
-    }
-
     // Using this method updates the Health Bar Full Image proportional to current hp / max hp
-    void UpdateHealthBar()
+    public void UpdateHealthBar(int newHealth)
     {
-        healthBar.fillAmount = (float)healthAmount / (float)maxHealth;
+        healthBar.fillAmount = (float)newHealth / (float)maxHealth;
     }
 
-    // Using this method prevents hp from exceeding Max hp
-    void ClampHealth()
+    public void UpdateCoins(int newCoins)
     {
-        healthAmount = (int)Mathf.Clamp(healthAmount, 0, maxHealth);
+        coinCounter.text = newCoins.ToString();
     }
 }

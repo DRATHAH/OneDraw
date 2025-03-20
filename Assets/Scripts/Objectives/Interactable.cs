@@ -94,22 +94,17 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
-        interacting = true;
-        interactEvent.Invoke();
-        Debug.Log("Interacted with " + gameObject.name);
-    }
-
-    public void EndInteract()
-    {
-        interacting = false;
-        leaveEvent.Invoke();
-        StartCoroutine(AllowShoot());
-        Debug.Log("Stopping interaction");
-    }
-
-    IEnumerator AllowShoot()
-    {
-        yield return new WaitForSeconds(.01f);
-        //PlayerStats.Instance.SetCursorLock(true);
+        if (!interacting)
+        {
+            interacting = true;
+            interactEvent.Invoke();
+            Debug.Log("Interacted with " + gameObject.name);
+        }
+        else
+        {
+            interacting = false;
+            leaveEvent.Invoke();
+            Debug.Log("Stopping interaction");
+        }
     }
 }

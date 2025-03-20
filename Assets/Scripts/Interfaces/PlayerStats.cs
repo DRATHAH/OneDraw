@@ -48,7 +48,7 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(HazardStats type in hazardTypes)
+        foreach(HazardStats type in hazardTypes) // Make new bow upgrades based on the default bow upgrade stats in Prefabs > Particles
         {
             HazardStats newStats = (HazardStats)ScriptableObject.CreateInstance(typeof(HazardStats));
             newStats.type = type.type;
@@ -72,7 +72,7 @@ public class PlayerStats : MonoBehaviour
             stacks.Add(type.type, newStats);
         }
 
-        if (!bow)
+        if (!bow) // Make new bow stats for the player based off of the defaultBow object in Prefabs > Items
         {
             bow = (Bow)ScriptableObject.CreateInstance(typeof(Bow));
             bow.dmg = defaultBow.dmg;
@@ -109,5 +109,11 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerShoot shootStats = player.GetComponent<PlayerShoot>();
         shootStats.UpdateStats(bow.dmg, bow.fireStrength, bow.drawSpeed, stacks);
+    }
+
+    public void UpdateCoins(int newCoins)
+    {
+        coins += newCoins;
+        HealthManager.instance.UpdateCoins(coins);
     }
 }
