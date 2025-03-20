@@ -5003,7 +5003,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1160192639}
         m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: Interact
+        m_MethodName: EndInteract
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5028,7 +5028,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1160192639}
         m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: Interact
+        m_MethodName: EndInteract
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
