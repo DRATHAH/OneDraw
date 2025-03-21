@@ -104,11 +104,13 @@ public class PlayerMovement : DamageableCharacter
 
     public void Look()
     {
+        float sensitivityMod = (Screen.height / 1080f) / (Screen.width / 1920f);
+
         float mouseHor = Input.GetAxis("Mouse X"); // Get horizontal mouse position
         float mouseVer = -Input.GetAxis("Mouse Y"); // Get vertical mouse position
 
-        vertRot += mouseVer * sensitivity * Time.deltaTime; // Get vertical rotation based on mouse movement
-        horRot += mouseHor * sensitivity * Time.deltaTime; // Get horizontal rotation based on mouse movement
+        vertRot += mouseVer * (sensitivity * sensitivityMod) * Time.deltaTime; // Get vertical rotation based on mouse movement
+        horRot += mouseHor * (sensitivity * sensitivityMod) * Time.deltaTime; // Get horizontal rotation based on mouse movement
 
         vertRot = Mathf.Clamp(vertRot, -clampAngle, clampAngle); // Limit how far up and down the player can look
         head.localRotation = Quaternion.Euler(vertRot, horRot, 0f); // Set rotation of head

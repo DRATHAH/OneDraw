@@ -7,6 +7,8 @@ public class PauseManager : MonoBehaviour
     bool isPaused = false;
     GameManager gameManager;
 
+    [Tooltip("If the player can pause the game or not.")]
+    public bool pausable = true;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public GameObject pauseButtonsMenu;
@@ -27,24 +29,31 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        if (isPaused)
+        if (pausable)
         {
-            isPaused = false;
-            gameManager.SetCursorLock(true);
-            gameManager.SetPlayerMove(true);
-            gameManager.ResumeTime();
-            settingsMenu.SetActive(false);
-            pauseButtonsMenu.SetActive(true);
-            pauseMenu.SetActive(false);
+            if (isPaused)
+            {
+                isPaused = false;
+                gameManager.SetCursorLock(true);
+                gameManager.SetPlayerMove(true);
+                gameManager.ResumeTime();
+                settingsMenu.SetActive(false);
+                pauseButtonsMenu.SetActive(true);
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                isPaused = true;
+                gameManager.SetCursorLock(false);
+                gameManager.SetPlayerMove(false);
+                gameManager.PauseTime();
+                pauseMenu.SetActive(true);
+            }
         }
-        else
-        {
-            isPaused = true;
-            gameManager.SetCursorLock(false);
-            gameManager.SetPlayerMove(false);
-            gameManager.PauseTime();
-            pauseMenu.SetActive(true);
-            
-        }
+    }
+
+    public void CanPause(bool state)
+    {
+        pausable = state;
     }
 }
