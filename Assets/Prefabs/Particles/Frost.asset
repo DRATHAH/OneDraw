@@ -29,3 +29,4 @@ MonoBehaviour:
   tickScale: 0
   subjectDuration: 0
   subjectScale: 0.25
+  idleSound: {fileID: 8300000, guid: a235d03ca6c94d54b91e3f1321aa8f4c, type: 3}

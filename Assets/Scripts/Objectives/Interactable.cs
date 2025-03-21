@@ -34,7 +34,7 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerStats.Instance.player.GetComponentInChildren<Camera>().transform;
+        player = GameManager.instance.player.GetComponentInChildren<Camera>().transform;
         promptCanvas.SetActive(false);
     }
 

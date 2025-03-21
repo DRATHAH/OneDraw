@@ -48,9 +48,14 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject icon in elementIcons)
+        foreach (GameObject icon in elementIcons)
         {
             icon.SetActive(false);
+        }
+
+        if (PlayerStats.Instance.bow)
+        {
+            PlayerStats.Instance.UpdateBowStats();
         }
     }
 
@@ -121,7 +126,7 @@ public class PlayerShoot : MonoBehaviour
         {
             foreach (GameObject icon in elementIcons)
             {
-                if (icon.name.ToLower().Contains(hazard.type.ToString()) && hazard.stacks > 0)
+                if (icon.name.ToLower().Contains(hazard.type.ToString().ToLower()) && hazard.stacks > 0)
                 {
                     icon.SetActive(true);
                     TMP_Text stackNum = icon.GetComponentInChildren<TMP_Text>();

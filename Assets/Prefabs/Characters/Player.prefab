@@ -55,6 +55,7 @@ MonoBehaviour:
   canMove: 1
   maxHealth: 10
   health: 10
+  targetable: 1
   isPlayer: 1
   damageMultiplier: 1
   loot: []
@@ -179,7 +180,7 @@ AudioSource:
   m_GameObject: {fileID: 1345087428913588515}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8462318800078146175, guid: 02f5a38eae0d83647a831abf572f5ccc, type: 2}
   m_audioClip: {fileID: 8300000, guid: bf518478ea0025249bc901dd7e79732f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -275,7 +276,7 @@ AudioSource:
   m_GameObject: {fileID: 1345087428913588515}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8462318800078146175, guid: 02f5a38eae0d83647a831abf572f5ccc, type: 2}
   m_audioClip: {fileID: 8300000, guid: 84c5f1eb202b640459c25f83854776cd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -371,7 +372,7 @@ AudioSource:
   m_GameObject: {fileID: 1345087428913588515}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8462318800078146175, guid: 02f5a38eae0d83647a831abf572f5ccc, type: 2}
   m_audioClip: {fileID: 8300000, guid: b47ccb102fd40034ea1abd37caa95732, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

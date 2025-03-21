@@ -19,4 +19,5 @@ MonoBehaviour:
   desc: Restores 2 HP.
   value: 2
   price: 1
+  useSound: {fileID: 8300000, guid: 1c86c7c1f00ff5240bf64e0b2dceb0ec, type: 3}
   isDefaultItem: 0

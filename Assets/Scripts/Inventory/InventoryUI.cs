@@ -27,14 +27,14 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !inventoryCanvas.activeSelf)
         {
             inventoryCanvas.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.SetCursorLock(false);
+            PauseManager.instance.pausable = false;
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {
             inventoryCanvas.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            GameManager.instance.SetCursorLock(true);
+            PauseManager.instance.pausable = true;
         }
     }
 

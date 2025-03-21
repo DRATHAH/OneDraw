@@ -33,7 +33,6 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
-    public PlayerMovement player;
     public Bow bow;
     [SerializeField] Bow defaultBow;
     public int coins = 0;
@@ -68,6 +67,7 @@ public class PlayerStats : MonoBehaviour
             newStats.tickScale = type.tickScale;
             newStats.subjectDuration = type.subjectDuration;
             newStats.subjectScale = type.subjectScale;
+            newStats.idleSound = type.idleSound;
 
             stacks.Add(type.type, newStats);
         }
@@ -107,7 +107,7 @@ public class PlayerStats : MonoBehaviour
 
     public void UpdateBowStats()
     {
-        PlayerShoot shootStats = player.GetComponent<PlayerShoot>();
+        PlayerShoot shootStats = GameManager.instance.player.GetComponent<PlayerShoot>();
         shootStats.UpdateStats(bow.dmg, bow.fireStrength, bow.drawSpeed, stacks);
     }
 

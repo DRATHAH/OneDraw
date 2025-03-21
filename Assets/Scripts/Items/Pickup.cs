@@ -24,6 +24,9 @@ public class Pickup : MonoBehaviour
     public float bobAmount = 0.025f;
     [Tooltip("The model that moves on the ground.")]
     public Transform graphic;
+    [Tooltip("Sound played ONLY when using the item, not for picking it up.")]
+    public AudioSource useSound;
+    public GameObject soundParticle;
 
 
     bool canDestroy = false;
@@ -41,6 +44,12 @@ public class Pickup : MonoBehaviour
                 else if (useUponCollection && item) // Or if the player uses it upon collection
                 {
                     item.Use();
+                    useSound.clip = item.useSound;
+                    if (useSound.clip)
+                    {
+                        GameObject sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+                        sound.GetComponent<SoundObject>().Initialize(useSound);
+                    }
                 }
             }
 

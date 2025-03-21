@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public RectTransform description;
     public TMP_Text number;
     public int amount = 0;
+    public AudioSource useSound;
 
     bool mouseOverlap = false;
 
@@ -24,6 +25,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         icon.sprite = item.icon;
         icon.enabled = true;
         amount = num;
+        if (newItem.useSound)
+        {
+            useSound.clip = newItem.useSound;
+        }
         removeButton.SetActive(true);
         number.transform.parent.gameObject.SetActive(true);
         number.text = amount.ToString();
@@ -34,7 +39,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (item)
         {
             Item tempItem = item;
-
+            useSound.Play();
             item.Use();
             Inventory.instance.Remove(item);
             if (!Inventory.instance.items.ContainsKey(tempItem))

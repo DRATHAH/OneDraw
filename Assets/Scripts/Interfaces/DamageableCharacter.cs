@@ -1,10 +1,7 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
 
 public class DamageableCharacter : MonoBehaviour, IDamageable
 {
@@ -39,17 +36,24 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             return health;
         }
     }
+
     public bool Targetable {
-        get { return targetable; }
+
         set
         {
             targetable = value;
+        }
+
+        get
+        {
+            return targetable;
         }
     }
 
     public bool canMove = true;
     public int maxHealth = 10;
     public int health = 10;
+    public bool targetable = true;
     public bool isPlayer = false;
     [Tooltip("Multiplies any damage taken by this amount.")]
     public float damageMultiplier = 1;
@@ -72,7 +76,6 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     bool modifyingDebuffs = false;
 
     [HideInInspector] public Rigidbody rb;
-    bool targetable = true;
     public Dictionary<Hazard, int> debuffs = new Dictionary<Hazard, int>(); // Types of debuffs applied to object
     public Dictionary<Hazard, float> timePair = new Dictionary<Hazard, float>(); // How long those debuffs will last for
 

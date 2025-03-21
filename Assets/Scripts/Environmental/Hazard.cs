@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Hazard : MonoBehaviour
 {
@@ -43,6 +40,7 @@ public class Hazard : MonoBehaviour
     float timeAlive = 0;
     bool deactivated = false;
     CapsuleCollider col;
+    AudioSource idleAudio;
 
     List<DamageableCharacter> characters = new List<DamageableCharacter>(); // List of targets currently affected by hazard's debuff
 
@@ -52,7 +50,7 @@ public class Hazard : MonoBehaviour
 
         stacks = baseStats.stacks;
         stuns = baseStats.stuns;
-        stunDuration = baseStats.stunDuration;
+        stunDuration = baseStats.stunDuration + ((stacks - 1) * baseStats.stunScale);
         damage = baseStats.damage + (int)((stacks - 1) * baseStats.damageScale + .5f);
         damageVulnerability = baseStats.damageVulnerability + ((stacks - 1) * baseStats.vulnerabilityScale);
         lifeTime = baseStats.lifeTime + ((stacks - 1) * baseStats.lifeScale);
@@ -76,6 +74,13 @@ public class Hazard : MonoBehaviour
         if (subjectDuration == 0) // Make sure debuff is only applied upon entering the hazard
         {
             subjectDuration = -1;
+        }
+
+        if (baseStats.idleSound)
+        {
+            idleAudio = GetComponent<AudioSource>();
+            idleAudio.clip = baseStats.idleSound;
+            idleAudio.Play();
         }
     }
 
@@ -104,7 +109,7 @@ public class Hazard : MonoBehaviour
         foreach(RaycastHit raycastHit in hit)
         {
             DamageableCharacter character = raycastHit.transform.root.GetComponent<DamageableCharacter>();
-            if (character && character.Targetable && !characters.Contains(character))
+            if (character && character.targetable && !characters.Contains(character))
             {
                 characters.Add(character);
                 character.ApplyDebuff(this); // Apply the debuff
@@ -117,7 +122,7 @@ public class Hazard : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         DamageableCharacter character = other.transform.root.GetComponent<DamageableCharacter>();
-        if (character && character.Targetable && !characters.Contains(character))
+        if (character && character.targetable && !characters.Contains(character))
         {
             characters.Add(character);
             character.ApplyDebuff(this);
@@ -133,7 +138,7 @@ public class Hazard : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         DamageableCharacter character = other.transform.root.GetComponent<DamageableCharacter>();
-        if (character && character.Targetable && !overTime)
+        if (character && character.targetable && !overTime)
         {
             character.RemoveDebuff(this);
             characters.Remove(character);
@@ -166,7 +171,7 @@ public class Hazard : MonoBehaviour
 
             foreach (DamageableCharacter dChar in characters) // Check targets already debuffed
             {
-                if (dChar && dChar.timePair.ContainsKey(this) && dChar.timePair[this] > 0) // If target has this hazard's debuff still affecting it and there's time left on it
+                if (dChar && dChar.targetable && dChar.timePair.ContainsKey(this) && dChar.timePair[this] > 0) // If target has this hazard's debuff still affecting it and there's time left on it
                 {
                     dChar.DebuffHit(this); // Hit it with another tick
 
@@ -175,7 +180,7 @@ public class Hazard : MonoBehaviour
                     foreach (RaycastHit raycastHit in hit)
                     {
                         DamageableCharacter character = raycastHit.transform.root.GetComponent<DamageableCharacter>();
-                        if (character && character.Targetable && character.Equals(dChar) && col.enabled)
+                        if (character && character.targetable && character.Equals(dChar) && col.enabled)
                         {
                             dChar.ApplyDebuff(this);
                         }
@@ -199,6 +204,7 @@ public class Hazard : MonoBehaviour
         }
         else if (timeSinceTickInside >= 1 && !overTime) // Reapply debuff if the character is standing in the hazard, even if it doesn't have any over-time effects
         {
+            List<DamageableCharacter> toRemove = new List<DamageableCharacter>();
             timeSinceTickInside = 0;
 
             foreach (DamageableCharacter dChar in characters)
@@ -209,13 +215,16 @@ public class Hazard : MonoBehaviour
                 }
             }
 
-            characters.Clear();
+            foreach (DamageableCharacter noChar in toRemove)
+            {
+                characters.Remove(noChar);
+            }
 
             RaycastHit[] hit = Physics.SphereCastAll(transform.TransformPoint(col.center), col.radius * size, Vector3.up, 0);
             foreach (RaycastHit raycastHit in hit)
             {
                 DamageableCharacter character = raycastHit.transform.root.GetComponent<DamageableCharacter>();
-                if (character && character.Targetable && !characters.Contains(character) && col.enabled)
+                if (character && character.targetable && !characters.Contains(character) && col.enabled)
                 {
                     characters.Add(character);
                     character.ApplyDebuff(this);
@@ -227,7 +236,13 @@ public class Hazard : MonoBehaviour
 
     IEnumerator DeleteAfterTime()
     {
-        yield return new WaitForSeconds(subjectDuration + 3);
+        while(idleAudio.volume > 0) // Have audio slowly fade out
+        {
+            idleAudio.volume -= .02f;
+            yield return new WaitForSeconds(.01f);
+        }
+
+        yield return new WaitForSeconds(subjectDuration + 3 - (1 / .02f * .01f));
         characters.Clear();
         Destroy(gameObject);
     }

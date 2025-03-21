@@ -44,4 +44,6 @@ public class HazardStats : ScriptableObject
     public float subjectDuration = 0;
     [Tooltip("How much a stack scales subject duration (additive).")]
     public float subjectScale = 0;
+    [Tooltip("Idle sound for the hazard.")]
+    public AudioClip idleSound;
 }

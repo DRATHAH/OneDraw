@@ -15,6 +15,8 @@ public class Item : ScriptableObject
     public float value = 5;
     [Tooltip("How much item sells for.")]
     public int price = 0;
+    [Tooltip("Sound for using item.")]
+    public AudioClip useSound;
     public bool isDefaultItem = false;
 
     public virtual void Use()

@@ -18,7 +18,7 @@ public class CreateCards : MonoBehaviour
 
     public void CreateCardList()
     {
-        if (limit > cards.Count) // If there are more available cards to make than to be spawned
+        if (limit < cards.Count) // If there are more available cards to make than to be spawned
         {
             while (instantiatedCards.Count < limit)
             {
@@ -27,6 +27,7 @@ public class CreateCards : MonoBehaviour
                 {
                     if (tempCard.stats.type.Equals(cards[random].type))
                     {
+                        CreateCardList();
                         return;
                     }
                 }

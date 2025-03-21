@@ -49,6 +49,11 @@ public class Subtitle : MonoBehaviour
             finished = true;
             uiText = null;
             text.text = toWrite;
+
+            if (!isSpeaker)
+            {
+                continuePrompt.SetActive(true);
+            }
         }
     }
 
