@@ -43,6 +43,7 @@ public class PlayerStats : MonoBehaviour
     public List<HazardStats> hazardTypes = new List<HazardStats>();
 
     Dictionary<HazardStats.HazardType, HazardStats> stacks = new Dictionary<HazardStats.HazardType, HazardStats>();
+    Dictionary<Item, int> items = new Dictionary<Item, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +110,29 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerShoot shootStats = GameManager.instance.player.GetComponent<PlayerShoot>();
         shootStats.UpdateStats(bow.dmg, bow.fireStrength, bow.drawSpeed, stacks);
+    }
+
+    public void SaveInventory(Inventory inventory)
+    {
+        items.Clear();
+        
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            items.Add(inventory.uniqueItems[i], inventory.items[inventory.uniqueItems[i]]);
+        }
+    }
+
+    public void LoadInventory(Inventory inventory)
+    {
+        inventory.ClearInventory();
+
+        foreach(Item item in items.Keys)
+        {
+            for (int i = 0; i < items[item]; i++)
+            {
+                inventory.Add(item);
+            }
+        }
     }
 
     public void UpdateCoins(int newCoins)

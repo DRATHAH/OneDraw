@@ -19,6 +19,10 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        if (PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.SaveInventory(Inventory.instance);
+        }
         StartCoroutine(LoadAsync(sceneName));
     }
 

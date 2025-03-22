@@ -24,9 +24,9 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback; // Call after modifying inventory to update it
 
     [Tooltip("How many times an item can stack.")]
-    public int itemSpace = 100;
+    public int itemSpace = 10;
     [Tooltip("How many unique items the player can hold.")]
-    public int space = 10;
+    public int space = 14;
 
     public List<Item> uniqueItems = new List<Item>();
     public Dictionary<Item, int> items = new Dictionary<Item, int>();

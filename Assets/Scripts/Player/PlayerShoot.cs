@@ -56,6 +56,7 @@ public class PlayerShoot : MonoBehaviour
         if (PlayerStats.Instance.bow)
         {
             PlayerStats.Instance.UpdateBowStats();
+            PlayerStats.Instance.LoadInventory(Inventory.instance);
         }
     }
 
