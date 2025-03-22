@@ -51,4 +51,11 @@ public class SceneChanger : MonoBehaviour
             yield return null;
         }
     }
+
+    public void RestartScene()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        StartCoroutine(LoadAsync(scene));
+    }
+
 }

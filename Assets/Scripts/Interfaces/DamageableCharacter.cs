@@ -25,9 +25,18 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             {
                 Targetable = false;
                 health = 0;
+                if (deathAnimation != null)
+                {
+                    deathAnimation.SetTrigger("Start");
+                }
                 if (!isPlayer)
                 {
                     RemoveCharacter();
+                }
+                else
+                {
+                    canMove = false;
+                    playerDeathEvent.Invoke();
                 }
             }
         }
@@ -67,6 +76,10 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public float lootSpawnOffset = .1f;
     [Tooltip("Sound(s) entity makes upon being destroyed.")]
     public List<AudioSource> lootSounds;
+    [Tooltip("Animation played when entity dies")]
+    public Animator deathAnimation;
+    [Tooltip("SceneTransition Whenever player dies. Do not use if not player")]
+    public UnityEvent playerDeathEvent;
     [Tooltip("Sound particle in prefabs folder.")]
     public GameObject soundParticle;
 
