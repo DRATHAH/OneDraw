@@ -11,6 +11,7 @@ public class Arrow : MonoBehaviour
     public int frostStacks = 0;
     public int fireStacks = 0;
     public int lightningStacks = 0;
+    public float turnTime = 10f;
     public Vector3 initialForce;
     public Rigidbody rb;
     public Transform lead;
@@ -67,7 +68,7 @@ public class Arrow : MonoBehaviour
             if (direction.magnitude > 0)
             {
                 Quaternion lookRot = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * turnTime);
             }
 
             // Calculates damage based on speed of arrow

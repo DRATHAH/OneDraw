@@ -17,5 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   id: 1
   desc: Used to purchase shop items.
+  value: 5
   price: 1
+  useSound: {fileID: 8300000, guid: 5798825e67442f44bb29f34f9e53be79, type: 3}
   isDefaultItem: 0
