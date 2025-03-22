@@ -5938,6 +5938,10 @@ MonoBehaviour:
   lootSpawnOffset: 0.5
   lootSounds:
   - {fileID: 369400155}
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   soundParticle: {fileID: 3967155419678253290, guid: 12873cd3b14ded84a83b296bec3dd965, type: 3}
   rb: {fileID: 0}
   OnDestroyEvents:
@@ -6598,6 +6602,10 @@ MonoBehaviour:
   lootSpawnOffset: 0.5
   lootSounds:
   - {fileID: 396164999}
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   soundParticle: {fileID: 3967155419678253290, guid: 12873cd3b14ded84a83b296bec3dd965, type: 3}
   rb: {fileID: 0}
   OnDestroyEvents:
@@ -13610,6 +13618,10 @@ MonoBehaviour:
   lootSpawnOffset: 0.5
   lootSounds:
   - {fileID: 679570505}
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   soundParticle: {fileID: 3967155419678253290, guid: 12873cd3b14ded84a83b296bec3dd965, type: 3}
   rb: {fileID: 0}
   OnDestroyEvents:
@@ -17741,9 +17753,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1736329245}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetCursorLock
+      - m_Target: {fileID: 177297719}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: CanPause
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17765,9 +17777,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 177297719}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: CanPause
+      - m_Target: {fileID: 1736329245}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetCursorLock
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23426,6 +23438,10 @@ MonoBehaviour:
   lootSpawnOffset: 0.5
   lootSounds:
   - {fileID: 1269861810}
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   soundParticle: {fileID: 3967155419678253290, guid: 12873cd3b14ded84a83b296bec3dd965, type: 3}
   rb: {fileID: 0}
   OnDestroyEvents:
@@ -26614,6 +26630,10 @@ MonoBehaviour:
   lootDropForce: 500
   lootSpawnOffset: 0.5
   lootSounds: []
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   soundParticle: {fileID: 0}
   rb: {fileID: 0}
   OnDestroyEvents:

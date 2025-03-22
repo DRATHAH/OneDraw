@@ -105,7 +105,7 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        DamageableCharacter damageable = collision.transform.root.GetComponentInChildren<DamageableCharacter>();
+        DamageableCharacter damageable = collision.transform.GetComponentInParent<DamageableCharacter>();
         if (damageable && canHit && collision.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.targetable)
         {
             // Freeze arrow once it hits a destructible

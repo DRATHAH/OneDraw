@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,13 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
             if (value > 0)
             {
                 // Hit animation
+
+                if (hurtSound)
+                {
+                    GameObject _sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+                    SoundObject soundObj = _sound.GetComponent<SoundObject>();
+                    soundObj.Initialize(hurtSound);
+                }
             }
 
             if (health > maxHealth)
@@ -76,6 +84,8 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public float lootSpawnOffset = .1f;
     [Tooltip("Sound(s) entity makes upon being destroyed.")]
     public List<AudioSource> lootSounds;
+    [Tooltip("Hurt sound effect.")]
+    public AudioSource hurtSound;
     [Tooltip("Animation played when entity dies")]
     public Animator deathAnimation;
     [Tooltip("SceneTransition Whenever player dies. Do not use if not player")]

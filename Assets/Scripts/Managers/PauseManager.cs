@@ -50,12 +50,12 @@ public class PauseManager : MonoBehaviour
             if (isPaused)
             {
                 isPaused = false;
-                gameManager.SetCursorLock(true);
-                gameManager.SetPlayerMove(true);
                 gameManager.ResumeTime();
                 settingsMenu.SetActive(false);
                 pauseButtonsMenu.SetActive(true);
                 pauseMenu.SetActive(false);
+                gameManager.SetCursorLock(true);
+                gameManager.SetPlayerMove(true);
             }
             else
             {
