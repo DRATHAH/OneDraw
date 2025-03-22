@@ -44,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
 
     float shootProgress = 0; // How long the player has held the mouse down for
     bool drawAudioPlaying = false;
+    public bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Cursor.lockState == CursorLockMode.Locked) // Make sure player isn't interacting with UI or anything else
+        if (!isDead && Input.GetKeyDown(KeyCode.Mouse0) && Cursor.lockState == CursorLockMode.Locked) // Make sure player isn't interacting with UI or anything else
         {
             canShoot = true;
         }
@@ -143,5 +144,10 @@ public class PlayerShoot : MonoBehaviour
     public void PlayPickupSound()
     {
         ArrowPickupSFX.Play(0);
+    }
+
+    public void SetDead(bool dead)
+    {
+        isDead = dead;
     }
 }

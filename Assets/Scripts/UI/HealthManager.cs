@@ -26,6 +26,8 @@ public class HealthManager : MonoBehaviour
     public int healthAmount = 10;
     public int maxHealth = 10;
 
+    public Animator deathAnimation;
+
     PlayerStats statsManager;
 
     // Start is called before the first frame update
@@ -47,5 +49,10 @@ public class HealthManager : MonoBehaviour
     public void UpdateCoins(int newCoins)
     {
         coinCounter.text = newCoins.ToString();
+    }
+
+    public void PlayDeathAnimation()
+    {
+        deathAnimation.SetTrigger("Start");
     }
 }

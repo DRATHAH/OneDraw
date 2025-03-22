@@ -80,7 +80,7 @@ public class PlayerMovement : DamageableCharacter
     {
         base.Update();
 
-        if (Cursor.lockState == CursorLockMode.Locked)
+        if (Cursor.lockState == CursorLockMode.Locked && canMove)
         {
             Look();
         }
@@ -88,6 +88,11 @@ public class PlayerMovement : DamageableCharacter
         if (canMove)
         {
             Move();
+        }
+
+        if (Input.GetKey(KeyCode.X))
+        {
+            
         }
 
         #region UI Elements
