@@ -9204,7 +9204,7 @@ PrefabInstance:
       objectReference: {fileID: 1989099865}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -9233,7 +9233,7 @@ PrefabInstance:
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 1325093349}
+      objectReference: {fileID: 1307934585}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
@@ -9248,7 +9248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: SetDead
+      value: SetPlayerMove
       objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -9264,7 +9264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: PlayerShoot, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: playerDeathEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -9904,17 +9904,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1716653751188269325, guid: ecf7772a3f64f9c4b95a6893fdec0758, type: 3}
   m_PrefabInstance: {fileID: 2018928640}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1325093349 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3129961414201782922, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
-  m_PrefabInstance: {fileID: 1236966320}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201c89c961a6e1843b48703e1583be6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1403386235
 GameObject:
   m_ObjectHideFlags: 0
