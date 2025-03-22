@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -9,6 +10,8 @@ public class WaitingEnemy : DamageableCharacter
 {
     public int dmg = 1;
     public float moveSpeed = 10f;
+    public float sightRange = 5f;
+    public float attackRange = 2f;
 
     private NavMeshAgent agent;
     private bool chasingPlayer;
@@ -16,7 +19,7 @@ public class WaitingEnemy : DamageableCharacter
     private Vector3 startLocation;
     private Rigidbody body;
 
-    void Start()
+    public override void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -25,7 +28,7 @@ public class WaitingEnemy : DamageableCharacter
         startLocation = transform.position;
     }
 
-    private void Update()
+    public override void Update()
     {
         // Chase
         if (chasingPlayer)

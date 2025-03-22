@@ -22,7 +22,7 @@ public class Hazard : MonoBehaviour
     public float damageVulnerability = 1;
 
     [Header("Hazard Stats")]
-    [Tooltip("How long the effect lasts on the ground.")]
+    [Tooltip("How long the effect lasts on the ground. Set to -1 for infinite lifetime.")]
     public float lifeTime = 0;
     [Tooltip("Size modifier. For arrow upgrades, scales with stacks.")]
     public float size = 0;
@@ -148,11 +148,11 @@ public class Hazard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeAlive < lifeTime) // Checks to see if the hazard has lasted through its duration on the ground
+        if (timeAlive < lifeTime && lifeTime > -1) // Checks to see if the hazard has lasted through its duration on the ground
         {
             timeAlive += Time.deltaTime;
         }
-        else if (!deactivated) // Disable its ability to apply debuffs
+        else if (!deactivated && lifeTime > -1) // Disable its ability to apply debuffs
         {
             deactivated = true;
             graphic.Stop();

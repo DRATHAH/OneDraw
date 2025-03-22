@@ -9,8 +9,8 @@ public class PatrolEnemy : DamageableCharacter
 {
     public int dmg = 1;
     public float moveSpeed = 10f;
-    public Transform patrolRoute;
     [Tooltip("Transform of the parent object containing waypoints")]
+    public Transform patrolRoute;
 
     private NavMeshAgent agent;
     private Transform[] locations;
@@ -19,7 +19,7 @@ public class PatrolEnemy : DamageableCharacter
     private Transform player;
     private Rigidbody body;
 
-    void Start()
+    public override void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -30,7 +30,7 @@ public class PatrolEnemy : DamageableCharacter
         MoveToNextPatrolLocation();
     }
 
-    private void Update()
+    public override void Update()
     {
         // Patrol
         if (!chasingPlayer && !agent.pathPending && agent.remainingDistance < 0.2f)

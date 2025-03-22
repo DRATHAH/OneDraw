@@ -11,6 +11,8 @@ public class SoundObject : MonoBehaviour
     public void Initialize(AudioSource soundToPlay)
     {
         sound.clip = soundToPlay.clip;
+        sound.rolloffMode = soundToPlay.rolloffMode;
+        sound.volume = soundToPlay.volume;
         float pitch = Random.Range(pitchVariance-pitchVariance, pitchVariance);
         sound.pitch = soundToPlay.pitch + pitch;
 
