@@ -105,6 +105,25 @@ public class Arrow : MonoBehaviour
             other.transform.root.GetComponent<PlayerShoot>().PlayPickupSound();
             Destroy(gameObject);
         }
+        else
+        {
+            DamageableCharacter damageable = other.transform.GetComponentInParent<DamageableCharacter>();
+            if (damageable && canHit && other.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.targetable)
+            {
+                GameObject hit = other.gameObject;
+                damageable.OnHit(dmg, rb.velocity * knockback, hit);
+                Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
+
+                foreach (HazardStats stat in hazards)
+                {
+                    if (stat.stacks > 0)
+                    {
+                        GameObject zone = Instantiate(hazardPrefab, transform.position, Quaternion.identity);
+                        zone.GetComponent<Hazard>().Initialize(stat);
+                    }
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -113,10 +132,10 @@ public class Arrow : MonoBehaviour
         if (damageable && canHit && collision.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.targetable)
         {
             // Freeze arrow once it hits a destructible
-            canHit = false;
-            rb.velocity = Vector3.zero;
-            arrowCol.isTrigger = true;
-            rb.isKinematic = true;
+            //canHit = false;
+            //rb.velocity = Vector3.zero;
+            //arrowCol.isTrigger = true;
+            //rb.isKinematic = true;
 
             GameObject hit = collision.gameObject;
             damageable.OnHit(dmg, rb.velocity * knockback, hit, supercharged);
