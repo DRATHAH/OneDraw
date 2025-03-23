@@ -72,6 +72,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public int health = 10;
     public bool targetable = true;
     public bool isPlayer = false;
+    public bool armored = false;
     [Tooltip("Multiplies any damage taken by this amount.")]
     public float damageMultiplier = 1;
     public List<GameObject> loot = new List<GameObject>();
@@ -127,14 +128,17 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void OnHit(int damage, Vector3 knockback, GameObject hit)
+    public virtual void OnHit(int damage, Vector3 knockback, GameObject hit, bool penetrating)
     {
         // We can add damage modifiers based off of the 'hit' GameObject using tags
 
-        Health -= (int)(damage * damageMultiplier + 0.5f);
-        if (rb)
+        if ((armored && penetrating) || !armored)
         {
-            rb.AddForce(knockback, ForceMode.Impulse);
+            Health -= (int)(damage * damageMultiplier + 0.5f);
+            if (rb)
+            {
+                rb.AddForce(knockback, ForceMode.Impulse);
+            }
         }
     }
 
@@ -193,7 +197,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     public void DebuffHit(Hazard type) // Function to be called when a debuff tick is applied
     {
-        OnHit(type.damage, Vector3.zero, gameObject); // Applies damage if any
+        OnHit(type.damage, Vector3.zero, gameObject, false); // Applies damage if any
         damageMultiplier = type.damageVulnerability; // Makes character more vulnerable if programmed
         if (type.stuns) // Stuns character if programmed
         {

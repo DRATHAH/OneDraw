@@ -30,7 +30,7 @@ public class WaitingEnemy : DamageableCharacter
     public float idleTime = 10f;
 
     Animator animator;
-    Transform target;
+    public Transform target;
     GameObject attackParticles;
     float timeSinceIdled = 0;
     bool targetInAttack, targetInSight = false;
@@ -172,7 +172,7 @@ public class WaitingEnemy : DamageableCharacter
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance < attackRange)
             {
-                target.GetComponent<DamageableCharacter>().OnHit(dmg, Vector3.zero, null);
+                target.GetComponent<DamageableCharacter>().OnHit(dmg, Vector3.zero, null, false);
             }
         }
     }

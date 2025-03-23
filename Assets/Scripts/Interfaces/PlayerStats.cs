@@ -39,6 +39,8 @@ public class PlayerStats : MonoBehaviour
     public int score = 0;
     public int health = 10;
     public int maxHealth = 10;
+    public bool tutorialComplete = false;
+    public float playerSensitivity = 4000;
 
     public List<HazardStats> hazardTypes = new List<HazardStats>();
 
@@ -133,6 +135,8 @@ public class PlayerStats : MonoBehaviour
                 inventory.Add(item);
             }
         }
+
+        GameManager.instance.player.sensitivity = playerSensitivity;
     }
 
     public void UpdateCoins(int newCoins)

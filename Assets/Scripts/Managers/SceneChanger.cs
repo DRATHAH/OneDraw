@@ -26,6 +26,18 @@ public class SceneChanger : MonoBehaviour
         StartCoroutine(LoadAsync(sceneName));
     }
 
+    public void TutorialCheck()
+    {
+        if (PlayerStats.Instance && PlayerStats.Instance.tutorialComplete)
+        {
+            ChangeScene("Rest");
+        }
+        else
+        {
+            ChangeScene("Tutorial");
+        }
+    }
+
     IEnumerator LoadAsync(string levelName)
     {
         // Start transition animation
