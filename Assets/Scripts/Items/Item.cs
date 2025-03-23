@@ -17,6 +17,8 @@ public class Item : ScriptableObject
     public int price = 0;
     [Tooltip("Sound for using item.")]
     public AudioClip useSound;
+    [Tooltip("If the item isn't used upon pickup, this will play when picking it up.")]
+    public AudioClip pickupSound;
     public bool isDefaultItem = false;
 
     public virtual void Use()

@@ -158,7 +158,6 @@ MonoBehaviour:
   bobSpeed: 2
   bobAmount: 0.1
   graphic: {fileID: 7992212649960580143}
-  useSound: {fileID: -1594452992516286222}
   soundParticle: {fileID: 3967155419678253290, guid: 12873cd3b14ded84a83b296bec3dd965, type: 3}
 --- !u!82 &-1594452992516286222
 AudioSource:
@@ -172,7 +171,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -8462318800078146175, guid: 02f5a38eae0d83647a831abf572f5ccc, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -10,9 +10,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     {
         set
         {
-            health = value;
-
-            if (value > 0)
+            if (value > 0 && value < health)
             {
                 // Hit animation
 
@@ -23,6 +21,8 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                     soundObj.Initialize(hurtSound);
                 }
             }
+
+            health = value;
 
             if (health > maxHealth)
             {

@@ -47,6 +47,11 @@ public class Sensor : MonoBehaviour
         SubtitleManager.instance.SetText(speaker, message);
     }
 
+    public void InvokeEvents()
+    {
+        sensorFunction.Invoke();
+    }
+
     public void Refresh()
     {
         hasSensed = false;

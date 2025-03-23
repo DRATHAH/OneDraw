@@ -236,10 +236,13 @@ public class Hazard : MonoBehaviour
 
     IEnumerator DeleteAfterTime()
     {
-        while(idleAudio.volume > 0) // Have audio slowly fade out
+        if (idleAudio)
         {
-            idleAudio.volume -= .02f;
-            yield return new WaitForSeconds(.01f);
+            while (idleAudio.volume > 0) // Have audio slowly fade out
+            {
+                idleAudio.volume -= .02f;
+                yield return new WaitForSeconds(.01f);
+            }
         }
 
         yield return new WaitForSeconds(subjectDuration + 3 - (1 / .02f * .01f));

@@ -24,22 +24,32 @@ public class Pickup : MonoBehaviour
     public float bobAmount = 0.025f;
     [Tooltip("The model that moves on the ground.")]
     public Transform graphic;
-    [Tooltip("Sound played ONLY when using the item, not for picking it up.")]
-    public AudioSource useSound;
     public GameObject soundParticle;
 
 
+    AudioSource useSound;
     bool canDestroy = false;
+
+    private void Start()
+    {
+        useSound = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponent<PlayerMovement>()) // Make sure collider is player
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && other.transform.GetComponentInParent<PlayerMovement>()) // Make sure collider is player
         {
             for (int i = 0; i < value; i++) // Go through how many items this pickup contains
             {
                 if (!useUponCollection && item && Inventory.instance.Add(item)) // If there's space for the item, pick it up
                 {
                     Debug.Log("Picked up " + item.name);
+                    useSound.clip = item.pickupSound;
+                    if (useSound.clip)
+                    {
+                        GameObject sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+                        sound.GetComponent<SoundObject>().Initialize(useSound);
+                    }
                 }
                 else if (useUponCollection && item) // Or if the player uses it upon collection
                 {

@@ -20,4 +20,5 @@ MonoBehaviour:
   value: 5
   price: 1
   useSound: {fileID: 8300000, guid: 5798825e67442f44bb29f34f9e53be79, type: 3}
+  pickupSound: {fileID: 8300000, guid: f079dcd365e7a754998ddde10c5aba11, type: 3}
   isDefaultItem: 0

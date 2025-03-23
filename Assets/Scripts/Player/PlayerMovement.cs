@@ -38,6 +38,7 @@ public class PlayerMovement : DamageableCharacter
     public float dashSpeed = 20f;
     public float dashTime = 0.3f;
     public float dashCooldown = 0.75f;
+    public AudioSource dashSound;
 
     private bool canDash = true;
     private float dashCDCurrent;
@@ -190,6 +191,7 @@ public class PlayerMovement : DamageableCharacter
     
     IEnumerator Dash()
     {
+        dashSound.Play();
         Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
         Vector3 movement = yaw * new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
