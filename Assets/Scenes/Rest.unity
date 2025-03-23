@@ -1930,6 +1930,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 446875669}
+    - target: {fileID: 4455200968967673037, guid: aae73ee0f4d59f14597a4a8e1db60802, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1736329245}
     - target: {fileID: 4819041552857946660, guid: aae73ee0f4d59f14597a4a8e1db60802, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16878,6 +16882,10 @@ PrefabInstance:
       propertyPath: dashMeter
       value: 
       objectReference: {fileID: 1119080549}
+    - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
+      propertyPath: targetable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2078825415947055098, guid: 174ec1ecadb0abf4fb7727bded07eeb1, type: 3}
       propertyPath: healthManager
       value: 

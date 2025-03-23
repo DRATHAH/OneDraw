@@ -165,15 +165,15 @@ MonoBehaviour:
       m_Calls: []
   head: {fileID: 3583575783728740949}
   mainCam: {fileID: 1511010061115574628}
-  sensitivity: 4000
+  sensitivity: 400
   clampAngle: 89
-  moveSpeed: 7
-  maxSpeed: 7
+  moveSpeed: 4
+  maxSpeed: 4
   jumpForce: 15
-  groundDrag: 5
+  groundDrag: 2
   airDrag: 1
   jumpDelay: 0.25
-  dashSpeed: 2
+  dashSpeed: 20
   dashTime: 0.25
   dashCooldown: 0.75
   dashSound: {fileID: 3446346230833767543}
