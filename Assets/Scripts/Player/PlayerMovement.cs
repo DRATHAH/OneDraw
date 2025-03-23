@@ -92,7 +92,7 @@ public class PlayerMovement : DamageableCharacter
 
         if (Input.GetKey(KeyCode.X))
         {
-            
+            Health -= 100;
         }
 
         #region UI Elements
