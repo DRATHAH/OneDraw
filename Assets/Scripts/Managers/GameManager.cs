@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         PlayerStats.Instance.playerSensitivity = level.value;
     }
 
-    public void SetFOV(float level)
+    public void SetFieldOfView(float level)
     {
         playerCamera.fieldOfView = (int)level;
     }
