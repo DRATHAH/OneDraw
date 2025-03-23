@@ -209,7 +209,7 @@ public class PatrolEnemy : DamageableCharacter
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance < attackRange)
             {
-                target.GetComponent<DamageableCharacter>().OnHit(dmg, Vector3.zero, null);
+                target.GetComponent<DamageableCharacter>().OnHit(dmg, Vector3.zero, null, false);
             }
         }
     }

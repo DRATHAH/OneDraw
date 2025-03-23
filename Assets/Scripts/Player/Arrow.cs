@@ -111,7 +111,7 @@ public class Arrow : MonoBehaviour
             if (damageable && canHit && other.transform.root.gameObject.layer != LayerMask.NameToLayer("Player") && damageable.targetable)
             {
                 GameObject hit = other.gameObject;
-                damageable.OnHit(dmg, rb.velocity * knockback, hit);
+                damageable.OnHit(dmg, rb.velocity * knockback, hit, supercharged);
                 Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
 
                 foreach (HazardStats stat in hazards)
