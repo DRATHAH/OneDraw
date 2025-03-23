@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public bool active = true;
     public SphereCollider col;
     [Tooltip("Layer player is on.")]
     public LayerMask playerLayer;
@@ -106,5 +105,10 @@ public class Interactable : MonoBehaviour
             leaveEvent.Invoke();
             Debug.Log("Stopping interaction");
         }
+    }
+
+    public void SetInteractableActive(bool state)
+    {
+        canInteract = state;
     }
 }

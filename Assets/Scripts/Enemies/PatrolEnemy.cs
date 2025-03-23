@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.FilePathAttribute;
 
 public class PatrolEnemy : DamageableCharacter
 {
@@ -93,7 +92,7 @@ public class PatrolEnemy : DamageableCharacter
         {
             if (hit.CompareTag("Player"))
             {
-                damageable.OnHit(dmg, body.velocity, hit);
+                damageable.OnHit(dmg, body.velocity, hit, false);
                 //Debug.Log("Hit Player");
             }
         }

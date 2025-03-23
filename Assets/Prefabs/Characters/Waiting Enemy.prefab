@@ -171,18 +171,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3078ef2bef7cbd47a11097572d57331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   maxHealth: 10
   health: 10
+  targetable: 1
   isPlayer: 0
+  armored: 0
+  damageMultiplier: 1
   loot: []
   lootChance: []
   lootDropForce: 1
   lootSpawnOffset: 0.1
+  lootSounds: []
+  hurtSound: {fileID: 0}
+  deathAnimation: {fileID: 0}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  soundParticle: {fileID: 0}
+  rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   dmg: 1
+  attackRate: 0
   moveSpeed: 8
+  turnSpeed: 10
+  sightRange: 5
+  requireFacing: 0
+  attackRange: 2
+  enemyAudio: {fileID: 0}
+  attackSound: {fileID: 0}
+  idleSounds: []
+  idleTime: 10
 --- !u!195 &1903489724711631339
 NavMeshAgent:
   m_ObjectHideFlags: 0

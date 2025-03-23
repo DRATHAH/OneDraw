@@ -11,15 +11,18 @@ public class Arrow : MonoBehaviour
     public int frostStacks = 0;
     public int fireStacks = 0;
     public int lightningStacks = 0;
+    public bool supercharged = false;
     public float turnTime = 10f;
     public Vector3 initialForce;
     public Rigidbody rb;
     public Transform lead;
     [Tooltip("Layers that the arrow can collide with.")]
     public LayerMask collisionLayers;
-    public UnityEvent hitEvent;
+    public AudioSource impactSFX;
+    public GameObject soundParticle;
 
     [Header("Particles")]
+    [SerializeField] GameObject superchargeParticles;
     [SerializeField] List<GameObject> particles = new List<GameObject>();
     [SerializeField] GameObject hazardPrefab;
     public List<HazardStats> hazards = new List<HazardStats>();
@@ -42,6 +45,7 @@ public class Arrow : MonoBehaviour
         arrowCol = GetComponent<BoxCollider>();
         rb.AddForce(initialForce);
 
+        superchargeParticles.SetActive(false);
         foreach(GameObject graphic in particles)
         {
             foreach(HazardStats haz in hazards)
@@ -115,7 +119,7 @@ public class Arrow : MonoBehaviour
             rb.isKinematic = true;
 
             GameObject hit = collision.gameObject;
-            damageable.OnHit(dmg, rb.velocity * knockback, hit);
+            damageable.OnHit(dmg, rb.velocity * knockback, hit, supercharged);
             Debug.Log("Arrow did " + dmg + " damage to " + hit.name);
 
             foreach (HazardStats stat in hazards)
@@ -126,6 +130,9 @@ public class Arrow : MonoBehaviour
                     zone.GetComponent<Hazard>().Initialize(stat);
                 }
             }
+
+            GameObject sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+            sound.GetComponent<SoundObject>().Initialize(impactSFX);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
@@ -143,6 +150,9 @@ public class Arrow : MonoBehaviour
                     zone.GetComponent<Hazard>().Initialize(stat);
                 }
             }
+
+            GameObject sound = Instantiate(soundParticle, transform.position, Quaternion.identity);
+            sound.GetComponent<SoundObject>().Initialize(impactSFX);
         }
     }
 
@@ -157,5 +167,11 @@ public class Arrow : MonoBehaviour
         {
             hazards.Add(haz);
         }
+    }
+
+    public void Supercharge()
+    {
+        supercharged = true;
+        superchargeParticles.SetActive(true);
     }
 }

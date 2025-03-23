@@ -213,9 +213,9 @@ public class PlayerMovement : DamageableCharacter
         canDash = true;
     }
 
-    public override void OnHit(int damage, Vector3 knockback, GameObject hit)
+    public override void OnHit(int damage, Vector3 knockback, GameObject hit, bool penetrating)
     {
-        base.OnHit(damage, knockback, hit);
+        base.OnHit(damage, knockback, hit, penetrating);
 
         healthManager.UpdateHealthBar(health);
     }
