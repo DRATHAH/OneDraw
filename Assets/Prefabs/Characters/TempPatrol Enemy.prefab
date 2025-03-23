@@ -5810,7 +5810,7 @@ MonoBehaviour:
   attackRate: 0.5
   moveSpeed: 12
   turnSpeed: 20
-  sightRange: 6
+  sightRange: 15
   requireFacing: 1
   attackRange: 2
   enemyAudio: {fileID: 3705279383290643556}

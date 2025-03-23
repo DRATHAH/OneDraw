@@ -133,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 1173221693240069671}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 040aabba5d9575f4d990884f88f1f363, type: 2}
+  m_Controller: {fileID: 9100000, guid: 56d11fb348b7764438df101f7605b72f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   turnSpeed: 10
   sightRange: 25
   requireFacing: 1
-  attackRange: 2
+  attackRange: 3
   enemyAudio: {fileID: 5598968013516154076}
   attackSound: {fileID: 8300000, guid: d2e353d7ea43dc44b99c973072b23e31, type: 3}
   idleSounds:
