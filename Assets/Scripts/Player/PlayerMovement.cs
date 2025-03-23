@@ -76,7 +76,6 @@ public class PlayerMovement : DamageableCharacter
         dashCDCurrent = dashCooldown;
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();
@@ -85,10 +84,19 @@ public class PlayerMovement : DamageableCharacter
         {
             Look();
         }
+    }
+
+    // Update is called once per frame
+    public void FixedUpdate()
+    {
 
         if (canMove)
         {
             Move();
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 
         if (Input.GetKey(KeyCode.X))
@@ -133,7 +141,7 @@ public class PlayerMovement : DamageableCharacter
         Quaternion yaw = Quaternion.Euler(0, head.eulerAngles.y, 0);
         Vector3 movement = yaw * new Vector3(horMovement * moveSpeed, 0, vertMovement * moveSpeed);
 
-        body.AddForce(movement.normalized * moveSpeed, ForceMode.Force);
+        body.AddForce(movement.normalized * moveSpeed, ForceMode.Impulse);
 
         if (CheckIfGrounded())
         {

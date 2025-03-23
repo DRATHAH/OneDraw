@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,10 +53,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    public void SetSensitivity(float level)
+    public void SetSensitivity(Slider level)
     {
-        player.sensitivity = level;
-        PlayerStats.Instance.playerSensitivity = level;
+
+        player.sensitivity = level.value;
+        PlayerStats.Instance.playerSensitivity = level.value;
     }
 
     public void SetFOV(float level)

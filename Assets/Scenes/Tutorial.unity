@@ -14060,6 +14060,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1589633812}
+    - target: {fileID: 4455200968967673037, guid: aae73ee0f4d59f14597a4a8e1db60802, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1307934585}
     - target: {fileID: 4819041552857946660, guid: aae73ee0f4d59f14597a4a8e1db60802, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
