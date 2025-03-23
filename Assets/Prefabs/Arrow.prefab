@@ -19606,12 +19606,13 @@ MonoBehaviour:
   frostStacks: 0
   fireStacks: 0
   lightningStacks: 0
+  turnTime: 10
   initialForce: {x: 0, y: 0, z: 0}
   rb: {fileID: 8541185704977080603}
   lead: {fileID: 5882831378626288590}
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 1
   hitEvent:
     m_PersistentCalls:
       m_Calls: []
